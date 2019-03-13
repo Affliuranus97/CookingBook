@@ -1,118 +1,119 @@
-html{
-	margin-left: calc(100vw - 100%);
+html {
+    margin-left: calc(100vw - 100%);
 }
 
-body{
-	background: linear-gradient(#ffcc99 0%, #ffbf80 20%, #ffb366 40%, #ffa64d 60%, #ff9933 80%, #ff8c1a 100%) fixed;
+body {
+    background: linear-gradient(#ffcc99 0%, #ffbf80 20%, #ffb366 40%, #ffa64d 60%, #ff9933 80%, #ff8c1a 100%) fixed;
 }
 
-.logo{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.textArea{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	size: auto;
-	font-weight: 700;
-	font-family: Consolas;
-	font-style: italic;
-	font-size: 25px;
-	padding: 10px;
+.textArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    size: auto;
+    font-weight: 700;
+    font-family: Consolas;
+    font-style: italic;
+    font-size: 25px;
+    padding: 10px;
 }
 
-.area{
-	resize: none;
-	width: 25em;
-	height: 10em;
-	padding: 7px;
-	font-family: Avantgarde;
-	font-style: italic;
-	font-size: 16px;
-	color: black;
-	background: #ffcc99;
+.area {
+    resize: none;
+    width: 25em;
+    height: 10em;
+    padding: 7px;
+    font-family: Avantgarde;
+    font-style: italic;
+    font-size: 16px;
+    color: black;
+    background: #ffcc99;
 }
 
-.area#instructionArea{
-	background-image: url("instructionArea.png");
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: 200px 200px;
+.area#instructionArea {
+    background-image: url("instructionArea.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 200px 200px;
 }
 
-.area#ingredientsArea{
-	background-image: url("ingredientsArea.gif");
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: 400px 200px;
+.area#ingredientsArea {
+    background-image: url("ingredientsArea.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 400px 200px;
 }
 
-.area#descriptionArea{
-	background-image: url("descriptionArea.png");
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: 200px 200px;
+.area#descriptionArea {
+    background-image: url("descriptionArea.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 200px 200px;
 }
 
-.bar::placeholder{
-	color: black;
-	font-family: Avantgarde;
-	font-style: italic;
-	font-weight: 600;
+.bar::placeholder {
+    color: black;
+    font-family: Avantgarde;
+    font-style: italic;
+    font-weight: 600;
 }
 
-.area::placeholder{
-	color: black;
+.area::placeholder {
+    color: black;
 }
 
-.search{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	font-weight: 700;
-	font-family: Consolas;
-	font-style: italic;
-	font-size: 25px;
-	padding: 10px;
+.search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 700;
+    font-family: Consolas;
+    font-style: italic;
+    font-size: 25px;
+    padding: 10px;
 }
 
-.bar{
-	width: 500px;
-	font-size: 19px;
-	background-image: url("searchBarBackground.jpg");
-	background-position: center;
-	background-size: 500px 500px;
+.bar {
+    width: 500px;
+    font-size: 19px;
+    background-image: url("searchBarBackground.jpg");
+    background-position: center;
+    background-size: 500px 500px;
 }
 
-.buttonDiv{
-	display: flex;
-	justify-content: center;
-	margin: 10px 10px;	
+.buttonDiv {
+    display: flex;
+    justify-content: center;
+    margin: 10px 10px;
 }
 
-.pageButton{
-	margin-left: 10px;
-	margin-right: 10px;
-	diplay: inline-block;
-	background-image: linear-gradient(to right, #a1c4fd 0%, #8fd3f4 51%, #84fab0 100%);
-	color: black;
-	padding: 15px 32px;
-	text-align: center;
-	text-decoration: none;
-	font-size: 16px;
-	font-family: Comic Sans MS;
-	box-shadow: 0 0 20px #111111;
-	border-radius: 10px;
-	transition: 0.5s;
+.pageButton {
+    margin-left: 10px;
+    margin-right: 10px;
+    diplay: inline-block;
+    background-image: linear-gradient(to right, #a1c4fd 0%, #8fd3f4 51%, #84fab0 100%);
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: Comic Sans MS;
+    box-shadow: 0 0 20px #111111;
+    border-radius: 10px;
+    transition: 0.5s;
 }
 
-.pageButton:hover{
-	background-position: right center;
-	background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #a1c4fd 100%);
+.pageButton:hover {
+    background-position: right center;
+    background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #a1c4fd 100%);
 }
+
 /* Search Results  */
 .results {
     margin: 40px 80px 0 80px;
