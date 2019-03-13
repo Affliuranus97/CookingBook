@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title> Cooking Book </title>
+	<title> Cooking Book </title>
+	<link rel = "stylesheet" type = "text/css" href = "style.css">
 </head>
 <body>
 <script>
 </script>
-<div class = "textArea">
-	Recipe Description:<br>
-	<textarea name = "descrArea" rows = "10" cols = "25" placeholder = "Enter Your Recipe Description." required></textarea>
+<div class = "header">
+	<div class = "logo">
+		<img src = "logo.png" alt = "Cooking Book Logo">
+	</div>
+	<div class = "buttonDiv">	
+		<a href = "MainPage.html" class = "pageButton">Home</a>
+		<a href = "SecondPage.html" class = "pageButton">Add a Recipe!</a>
+	</div>
 </div>
 <div class = "textArea">
-	Recipe Ingredients:<br>
-	<textarea name = "ingrArea" rows = "10" cols = "25" placeholder = "Enter The Needed Ingredients." required></textarea>
+	Recipe Description:
+	<textarea name = "descriptionArea" class = "descrArea" placeholder = "Enter Your Recipe Description." required></textarea>
 </div>
 <div class = "textArea">
-	Recipe Instructions:<br>
-	<textarea name = "instrArea" rows = "10" cols = "25" placeholder = "Enter The Instructions." required></textarea>
+	Recipe Ingredients:
+	<textarea name = "ingredientsArea" class = "ingrArea" placeholder = "Enter The Needed Ingredients." required></textarea>
 </div>
-<div class = "pageButton">
-	<button type = "button">Return to Main Page</button>
+<div class = "textArea">
+	Recipe Instructions:
+	<textarea name = "instructionArea" class = "instrArea" placeholder = "Enter The Instructions." required></textarea>
 </div>
 </body>
 </html>
