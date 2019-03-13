@@ -20,6 +20,8 @@ body{
 	font-weight: 700;
 	font-family: Consolas;
 	font-style: italic;
+	font-size: 25px;
+	padding: 10px;
 }
 
 .area{
@@ -32,9 +34,34 @@ body{
 	font-size: 16px;
 	color: black;
 	background: #ffcc99;
-	background-image: url("areaBackground.png");
+}
+
+.area#instructionArea{
+	background-image: url("instructionArea.png");
 	background-repeat: no-repeat;
 	background-position: center;
+	background-size: 200px 200px;
+}
+
+.area#ingredientsArea{
+	background-image: url("ingredientsArea.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 400px 200px;
+}
+
+.area#descriptionArea{
+	background-image: url("descriptionArea.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 200px 200px;
+}
+
+.bar::placeholder{
+	color: black;
+	font-family: Avantgarde;
+	font-style: italic;
+	font-weight: 600;
 }
 
 .area::placeholder{
@@ -45,10 +72,19 @@ body{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	font-weight: 700;
+	font-family: Consolas;
+	font-style: italic;
+	font-size: 25px;
+	padding: 10px;
 }
 
-.search input[type = "text"]{
+.bar{
 	width: 500px;
+	font-size: 19px;
+	background-image: url("searchBarBackground.jpg");
+	background-position: center;
+	background-size: 500px 500px;
 }
 
 .buttonDiv{
