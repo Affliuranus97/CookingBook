@@ -106,12 +106,17 @@ body {
     font-family: Comic Sans MS;
     box-shadow: 0 0 20px #111111;
     border-radius: 10px;
-    transition: 0.5s;
 }
 
 .pageButton:hover {
     background-position: right center;
     background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #a1c4fd 100%);
+}
+
+.credits {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
 }
 
 /* Search Results  */
@@ -136,11 +141,19 @@ body {
     border: 10px solid #ffb237;
 }
 
+.results .card:hover {
+    transition: all .2s ease-in-out;
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.55);
+    cursor: pointer;
+
+}
+
 .results .card .image {
     padding: 5px 5px 5px 5px;
     height: 180px;
     border-radius: 12px 12px 0 0;
-    background-image: urL('http://www.gotvetesmen.com/gallery/albums/userpics/10005/Tatarsko_kyufte.jpg');
+    background-image: url("http://www.gotvetesmen.com/gallery/albums/userpics/10005/Tatarsko_kyufte.jpg");
 }
 
 .results .card .title {
@@ -154,13 +167,16 @@ body {
     border-top: 4px solid #EEE;
 }
 
-.results .card:hover {
-    transition: all .2s ease-in-out;
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.55);
-    cursor: pointer;
-
+.credits::image {
+	align-items: flex-end;
+	height: 100px;
+	width: 100px;
 }
+
+.line {
+	border-top: 2px solid gray;
+}
+
 
 
 
