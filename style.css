@@ -102,7 +102,7 @@ body {
 .pageButton {
     margin-left: 10px;
     margin-right: 10px;
-    diplay: inline-block;
+    display: inline-block;
     background-image: linear-gradient(to right, #a1c4fd 0%, #8fd3f4 51%, #84fab0 100%);
     color: black;
     padding: 15px 32px;
@@ -138,12 +138,12 @@ body {
 }
 
 .credits .creditsText {
-    font-family: Helvetica, Sans-Serif;
+    font-family: Helvetica, sans-serif;
     font-size: 16px;
     font-weight: 600;
     font-style: italic;
     color: #222;
-    text-shadow: 0px 0px 3px #555;
+    text-shadow: 0 0 3px #555;
 }
 
 /* Mail Feature */
@@ -152,32 +152,32 @@ body {
 }
 
 .credits .creditsText .mail a:link{
-    font-family: Helvetica, Sans-Serif;
+    font-family: Helvetica, sans-serif;
     font-size: 18px;
     font-weight: 600;
     font-style: italic;
     color: #222;
-    text-shadow: 0px 0px 3px #555;
+    text-shadow: 0 0 3px #555;
     text-decoration: none;
 }
 
 .credits .creditsText .mail a:visited{
-    font-family: Helvetica, Sans-Serif;
+    font-family: Helvetica, sans-serif;
     font-size: 18px;
     font-weight: 600;
     font-style: italic;
     color: #222;
-    text-shadow: 0px 0px 3px #555;
+    text-shadow: 0 0 3px #555;
     text-decoration: none;
 }
 
 .credits .creditsText .mail a:active{
-    font-family: Helvetica, Sans-Serif;
+    font-family: Helvetica, sans-serif;
     font-size: 18px;
     font-weight: 600;
     font-style: italic;
     color: #222;
-    text-shadow: 0px 0px 3px #555;
+    text-shadow: 0 0 3px #555;
     text-decoration: none;
 }
 
@@ -187,37 +187,37 @@ body {
 }
 
 .credits .creditsText .phone a:link{
-    font-family: Helvetica, Sans-Serif;
+    font-family: Helvetica, sans-serif;
     font-size: 18px;
     font-weight: 600;
     font-style: italic;
     color: #222;
-    text-shadow: 0px 0px 3px #555;
+    text-shadow: 0 0 3px #555;
     text-decoration: none;
 }
 
 .credits .creditsText .phone a:visited{
-    font-family: Helvetica, Sans-Serif;
+    font-family: Helvetica, sans-serif;
     font-size: 18px;
     font-weight: 600;
     font-style: italic;
     color: #222;
-    text-shadow: 0px 0px 3px #555;
+    text-shadow: 0 0 3px #555;
     text-decoration: none;
 }
 
 .credits .creditsText .phone a:active{
-    font-family: Helvetica, Sans-Serif;
+    font-family: Helvetica, sans-serif;
     font-size: 18px;
     font-weight: 600;
     font-style: italic;
     color: #222;
-    text-shadow: 0px 0px 3px #555;
+    text-shadow: 0 0 3px #555;
     text-decoration: none;
 }
 
 .h3{
-    diplay: flex;
+    display: flex;
     font-size: 20px;
     margin-top: 2px;
     margin-bottom: 2px;
