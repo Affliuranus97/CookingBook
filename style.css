@@ -1,8 +1,6 @@
 @font-face{
-	font-family: Avantgarde;
-	src: url("AVANTN.ttf");
-	src:
-	url("AVANTN.ttf");
+	font-family: "Avantgarde";
+	src: url("res/AVANTN.ttf");
 }
 
 html {
@@ -292,7 +290,7 @@ body {
 	width: 100%;
 	top: 0;
 	left: 0;
-	background: rgba(17, 17, 17, 0.8); 
+	background: rgba(17, 17, 17, 0.8);
 }
 
 .visible{
