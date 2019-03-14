@@ -6,12 +6,14 @@ body {
     background: linear-gradient(#ffcc99 0%, #ffbf80 20%, #ffb366 40%, #ffa64d 60%, #ff9933 80%, #ff8c1a 100%) fixed;
 }
 
+/* Logo Image */
 .logo {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* Text Area */
 .textArea {
     display: flex;
     flex-direction: column;
@@ -37,37 +39,33 @@ body {
 }
 
 .area#instructionArea {
-    background-image: url("instructionArea.png");
+    background-image: url("res/instructionArea.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 200px 200px;
 }
 
 .area#ingredientsArea {
-    background-image: url("ingredientsArea.gif");
+    background-image: url("res/ingredientsArea.gif");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 400px 200px;
 }
 
 .area#descriptionArea {
-    background-image: url("descriptionArea.png");
+    background-image: url("res/descriptionArea.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 200px 200px;
 }
 
-.bar::placeholder {
-    color: black;
-    font-family: Avantgarde;
-    font-style: italic;
-    font-weight: 600;
-}
+
 
 .area::placeholder {
     color: black;
 }
 
+/* Search Area */
 .search {
     display: flex;
     flex-direction: column;
@@ -82,11 +80,19 @@ body {
 .bar {
     width: 500px;
     font-size: 19px;
-    background-image: url("searchBarBackground.jpg");
+    background-image: url("res/searchBarBackground.jpg");
     background-position: center;
     background-size: 500px 500px;
 }
 
+.bar::placeholder {
+    color: black;
+    font-family: Avantgarde;
+    font-style: italic;
+    font-weight: 600;
+}
+
+/* Buttons */
 .buttonDiv {
     display: flex;
     justify-content: center;
@@ -113,10 +119,113 @@ body {
     background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #a1c4fd 100%);
 }
 
+/* Page Credits */
 .credits {
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+}
+
+.credits .tulogo {
+    margin-top: 5px;
+	height: 100px;
+	width: 100px;
+}
+
+.credits .tulogo:hover{
+    transition: .2s ease-in-out;
+    transform: scale(1.1) translate(-5px, -5px);
+    box-shadow: 0 0 10px 0 black;
+}
+
+.credits .creditsText {
+    font-family: Helvetica, Sans-Serif;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: italic;
+    color: #222;
+    text-shadow: 0px 0px 3px #555;
+}
+
+/* Mail Feature */
+.credits .creditsText .mail a:hover{
+    box-shadow: 0 0 10px 0 black;
+}
+
+.credits .creditsText .mail a:link{
+    font-family: Helvetica, Sans-Serif;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: italic;
+    color: #222;
+    text-shadow: 0px 0px 3px #555;
+    text-decoration: none;
+}
+
+.credits .creditsText .mail a:visited{
+    font-family: Helvetica, Sans-Serif;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: italic;
+    color: #222;
+    text-shadow: 0px 0px 3px #555;
+    text-decoration: none;
+}
+
+.credits .creditsText .mail a:active{
+    font-family: Helvetica, Sans-Serif;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: italic;
+    color: #222;
+    text-shadow: 0px 0px 3px #555;
+    text-decoration: none;
+}
+
+/* Telephone Feature */
+.credits .creditsText .phone a:hover{
+    box-shadow: 0 0 10px 0 black;
+}
+
+.credits .creditsText .phone a:link{
+    font-family: Helvetica, Sans-Serif;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: italic;
+    color: #222;
+    text-shadow: 0px 0px 3px #555;
+    text-decoration: none;
+}
+
+.credits .creditsText .phone a:visited{
+    font-family: Helvetica, Sans-Serif;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: italic;
+    color: #222;
+    text-shadow: 0px 0px 3px #555;
+    text-decoration: none;
+}
+
+.credits .creditsText .phone a:active{
+    font-family: Helvetica, Sans-Serif;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: italic;
+    color: #222;
+    text-shadow: 0px 0px 3px #555;
+    text-decoration: none;
+}
+
+.h3{
+    diplay: flex;
+    font-size: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-weight: 700;
+}
+
+.line {
+	border-top: 2px solid gray;
 }
 
 /* Search Results  */
@@ -167,15 +276,7 @@ body {
     border-top: 4px solid #EEE;
 }
 
-.credits::image {
-	align-items: flex-end;
-	height: 100px;
-	width: 100px;
-}
 
-.line {
-	border-top: 2px solid gray;
-}
 
 
 
