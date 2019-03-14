@@ -1,5 +1,5 @@
 @font-face{
-	font-family: "Avantgarde";
+	font-family: Avantgarde;
 	src: url("AVANTN.ttf");
 	src:
 	url("AVANTN.ttf");
@@ -39,6 +39,7 @@ body {
     height: 10em;
     padding: 7px;
     font-family: Avantgarde;
+	font-style: italic;
     font-size: 16px;
     color: black;
     background: #ffcc99;
@@ -254,6 +255,7 @@ body {
     background: #ffb237;
     transition: all .2s ease-in-out;
     border: 10px solid #ffb237;
+	z-index: 0;
 }
 
 .results .card:hover {
@@ -282,7 +284,34 @@ body {
     border-top: 4px solid #EEE;
 }
 
+/* Hidden Object */
+.wrapper{
+	position: fixed;
+	visibility: hidden;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(17, 17, 17, 0.8); 
+}
 
+.visible{
+	visibility: visible;
+}
+
+.recipeObject {
+	position: fixed;
+	width: 700px;
+	height: 700px;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	background: #ffb237;
+	border-radius: 50px;
+	z-index: 1;
+}
 
 
 
