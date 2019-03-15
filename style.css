@@ -297,10 +297,11 @@ body {
 	visibility: visible;
 }
 
+/* Recipe Zoomed Card */
 .recipeObject {
 	position: fixed;
 	width: 700px;
-	height: 700px;
+	height: 600px;
 	left: 0;
 	right: 0;
 	top: 0;

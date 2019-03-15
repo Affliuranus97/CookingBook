@@ -34,7 +34,6 @@ fillCards(data);
 //v obekta porednostta
 
 $(".card").click(function(){
-	/*$(this).toggleClass("clicked");*/
 	$(".wrapper").addClass("visible");
 });
 
