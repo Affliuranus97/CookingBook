@@ -1,0 +1,91 @@
+<cookingBook>
+    <recipe>
+        <id>id_0</id>
+        <name>Ultimate Chocolate Cake</name>
+        <description>
+            Indulge yourself with this ultimate chocolate cake recipe that is beautifully moist, rich and fudgy. 
+            Perfect for a celebration or an afternoon tea.
+        </description>
+        <ingredients>
+            200g butter, 
+            3 eggs, 
+            75g milk, 
+            1 tbsp coffee, 
+            400g dark chocolate, 
+            200g sugar, 
+            25g cocoa powder, 
+            85g flour, 
+            300g cream, 
+            1/4 soda
+        </ingredients>
+        <instruction>
+            Heat the oven to 160C. Put 200g chopped dark chocolate in a medium pan with 200g butter. 
+            Mix 1 tbsp instant coffee granules into 125ml cold water and pour into the pan. 
+            Warm through over a low heat just until everything is melted – don’t overheat. 
+            Or melt in the microwave for about 5 minutes, stirring halfway through. 
+            Mix 85g plain flour, 1/4 tsp bicarbonate of soda, 200g sugar and 25g cocoa powder, and squash out any lumps. 
+            Beat 3 medium eggs with 75ml buttermilk. Pour the melted chocolate mixture and the egg mixture into the 
+            flour mixture and stir everything to a smooth, quite runny consistency. Pour this into the tin and bake for 1hr 25 – 1hr 30 mins. 
+            If you push a skewer into the centre it should come out clean and the top should feel firm (don’t worry if it cracks a bit). 
+            Leave to cool in the tin (don’t worry if it dips slightly), then turn out onto a wire rack to cool completely. 
+            Cut the cold cake horizontally into three. To make the ganache, put 200g chopped dark chocolate in a bowl. 
+            Pour 300g double cream into a pan and heat until it is about to boil. Take off the heat and pour it over the chocolate. 
+            Stir until the chocolate has melted and the mixture is smooth. Cool until it is a little thicker but still pourable.
+            Sandwich the layers together with just a little of the ganache. Pour the rest over the cake letting it fall down the sides 
+            and smooth over any gaps with a palette knife. Decorate with 50g grated chocolate or 100g chocolate curls. 
+            The cake keeps moist and gooey for 3-4 days.
+        </instruction>
+    </recipe>
+    <recipe>
+        <id>id_1</id>
+        <name>Homemade Chicken Soup</name>
+        <description>
+            Homemade chicken soup - but you don't have to be sick to deserve or enjoy it - you do, so do! Good for body and soul!
+        </description>
+        <ingredients>
+            1 chicken, 
+            4 carrots, 
+            4 stalks celery, 
+            1 onion, 
+            1 tbsp salt, 
+            1 tbsp pepper, 
+            1 tsp chicken boullion
+        </ingredients>
+        <instruction>
+            Put the chicken, carrots, celery and onion in a large soup pot and cover with cold water. 
+            Heat and simmer, uncovered, until the chicken meat falls off of the bones (skim off foam every so often). 
+            Take everything out of the pot. Strain the broth. Pick the meat off of the bones and chop the carrots, celery and onion. 
+            Season the broth with salt, pepper and chicken bouillon to taste, if desired. 
+            Return the chicken, carrots, celery and onion to the pot, stir together, and serve.
+        </instruction>
+    </recipe>
+    <recipe>
+        <id>id_2</id>
+        <name>Italian Meatballs</name>
+        <description>
+            These are my idea of "perfect" meatballs. I make them extra soft and juicy by using bread instead of breadcrumbs, 
+            and the grated onion is my secret tip for adding extra flavour into this. Plus, no need to sauté diced onion before mixing it in! 
+            Served with a rich tomato sauce made extra tasty by cooking it in the same pan that the meatballs are browned in.
+        </description>
+        <ingredients>
+            1 cup diced bread, 
+            400g ground beef, 
+            100g ground pork, 
+            1 egg, 
+            1 onion, 
+            3/4 tbsp salt, 
+            1/4 tbsp pepper, 
+            1/4 cup parmesan, 
+            2 garlic cloves, 
+            1/4 cup parsley
+        </ingredients>
+        <instruction>
+            Grate the onion using a standard box grater in a large bowl until you have about 1/2 cup of grated onion and juices. 
+            Add bread, mix to combine so the onion juice soaks the bread and disintegrates. Set aside while you prep the other ingredients (5 min or so). 
+            Add all the remaining Meatball ingredients. Use hands to mix well. 
+            Measure out a heaped tablespoon and roll lightly to form a ball. Repeat with remaining mixture. 
+            Heat 1 1/2 tbsp olive oil in a large non stick fry pan over medium high heat. Add the meatballs and brown all over - about 3 - 4 minutes. 
+            When they are browned but NOT cooked through, carefully transfer them onto a plate.
+        </instruction>
+    </recipe>
+</cookingBook>
