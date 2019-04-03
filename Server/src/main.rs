@@ -4,21 +4,22 @@
 extern crate rocket;
 extern crate rocket_contrib;
 
-use json::{JsonValue, Array};
-use rocket::{Request, Response, Config, State};
-use rocket::http::Status;
-use rocket::response::Responder;
 use std::io::Cursor;
 use std::path::PathBuf;
 use std::iter::*;
+use std::ffi::OsStr;
 use std::hash::Hash;
 use std::collections::HashMap;
-use rocket::config::Environment;
-use rocket_contrib::serve::{Options, StaticFiles};
+use std::cmp::Ordering;
+use json::{JsonValue, Array};
 use json::object::Object;
 use rayon::slice::ParallelSliceMut;
-use std::cmp::Ordering;
 use rayon::iter::ParallelIterator;
+use rocket::{Request, Response, Config, State};
+use rocket::http::Status;
+use rocket::response::Responder;
+use rocket::config::Environment;
+use rocket_contrib::serve::{Options, StaticFiles};
 
 enum Unit {
     Liter(f32),
