@@ -288,25 +288,17 @@ pub fn has_invalid_amounts(query: &HashMap<String, f32>) -> bool
     return query.values().find(|&&x| x == -1f32).is_some();
 }
 
-pub fn score_all_recipes(
+pub fn score_all_recipes<'r>(
     query: &HashMap<String, f32>,
-    recipes: &Vec<Recipe>,
-) -> Vec<(usize, &Recipe)>
+    recipes: &'r Vec<Recipe>,
+) -> Vec<(f32, &'r Recipe)>
 {
-    let mut scored_recipes = recipes.iter().enumerate().collect::<Vec<_>>();
-    let mut scores: Vec<f32> = Vec::new();
-    scores.resize(scored_recipes.len(), 0f32);
+    let mut scored_recipes = recipes
+        .iter()
+        .map(|r| (score_recipe(&query, r), r))
+        .collect::<Vec<_>>();
 
-    for (i, r) in &scored_recipes {
-        scores[*i] = score_recipe(&query, r);
-    }
-
-    scored_recipes.sort_by_key(|r| (scores[r.0] * 1000f32) as i32);
-
-    for (i, r) in scored_recipes.iter_mut() {
-        *i = (scores[*i] * 1000f32) as usize;
-    }
-
+    scored_recipes.sort_by_key(|r| (r.0 * 1000f32) as i32);
     scored_recipes
 }
 
@@ -319,12 +311,15 @@ pub fn api_search(recipes: State<Vec<Recipe>>, query: PathBuf) -> JsonResponse
         return JsonResponse { value: JsonValue::new_object() };
     }
 
-    let scored_recipes = score_all_recipes(&search_map, &recieps);
+    let scored_recipes: Vec<(f32, &Recipe)>
+        = score_all_recipes(&search_map, recipes.inner());
 
-    let mut found_recipes = Array::new();
+    let mut response = Object::new();
+    let mut found_recipes: Vec<JsonValue> = Array::new();
     if !scored_recipes.is_empty() {
-        let can_make_now: Vec<_> = scored_recipes.iter()
-            .take_while(|&&r| r.0 <= 0)
+        let can_make_now: Vec<_> = scored_recipes
+            .iter()
+            .take_while(|&&r| r.0 <= 0.0)
             .map(|&r| r)
             .collect();
 
@@ -342,7 +337,6 @@ pub fn api_search(recipes: State<Vec<Recipe>>, query: PathBuf) -> JsonResponse
         }
     }
 
-    let mut response = Object::new();
     response.insert("recipes", JsonValue::Array(found_recipes));
     JsonResponse { value: JsonValue::Object(response) }
 }
