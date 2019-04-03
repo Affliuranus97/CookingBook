@@ -270,7 +270,8 @@ pub fn parse_parameter(name: String, amount_str: String) -> Option<(String, f32)
 
 pub fn parse_parameters(query: PathBuf) -> HashMap<String, f32>
 {
-    // PathBuf provides OsStr objects, that are clunky. Convert to normal Strings.
+    // PathBuf provides OsStr objects, that are clunky. Convert
+    // to normal Strings.
     let search_params = query.iter()
         .map(|x| x.to_string_lossy().to_string())
         .collect::<Vec<String>>();
@@ -280,7 +281,10 @@ pub fn parse_parameters(query: PathBuf) -> HashMap<String, f32>
         search_params.iter().skip(1).step_by(2),
     );
 
-    search_string_map.into_iter().filter_map(parse_parameter_tuple).collect()
+    return search_string_map
+        .into_iter()
+        .filter_map(parse_parameter_tuple)
+        .collect();
 }
 
 pub fn has_invalid_amounts(query: &HashMap<String, f32>) -> bool
@@ -324,12 +328,12 @@ pub fn api_search(recipes: State<Vec<Recipe>>, query: PathBuf) -> JsonResponse
             .collect();
 
 
-        let iter = if !can_make_now.is_empty() {
-            response.insert("can_make_any", JsonValue::Boolean(true));
-            can_make_now.iter()
-        } else {
+        let iter = if can_make_now.is_empty() {
             response.insert("can_make_any", JsonValue::Boolean(false));
             scored_recipes.iter()
+        } else {
+            response.insert("can_make_any", JsonValue::Boolean(true));
+            can_make_now.iter()
         };
 
         for &(score, recipe) in iter.take(128) {
