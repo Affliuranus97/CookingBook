@@ -21,7 +21,8 @@ use rocket::response::Responder;
 use rocket::config::Environment;
 use rocket_contrib::serve::{Options, StaticFiles};
 
-enum Unit {
+pub enum Unit
+{
     Liter(f32),
     Milliliter(f32),
     TableSpoon(f32),
@@ -32,11 +33,26 @@ enum Unit {
     Kilogram(f32),
 
     Count(i32),
-
 }
 
-impl Unit {
-    pub fn value(&self) -> f32 {
+pub struct Recipe
+{
+    name: String,
+    description: String,
+    guide: String,
+    image_path: String,
+    ingredients: HashMap<String, Unit>,
+}
+
+pub struct JsonResponse
+{
+    value: json::JsonValue
+}
+
+impl Unit
+{
+    pub fn value(&self) -> f32
+    {
         match self {
             // Volume
             Unit::Liter(x) => *x,
@@ -52,7 +68,8 @@ impl Unit {
         }
     }
 
-    pub fn name(&self) -> &'static str {
+    pub fn name(&self) -> &'static str
+    {
         match self {
             // Volume
             Unit::Liter(_) => "liters",
@@ -70,13 +87,15 @@ impl Unit {
         }
     }
 
-    pub fn to_json(&self) -> JsonValue {
+    pub fn to_json(&self) -> JsonValue
+    {
         let mut obj = Object::new();
         obj.insert(self.name(), JsonValue::from(self.value()));
         JsonValue::from(obj)
     }
 
-    pub fn to_si(&self) -> Self {
+    pub fn to_si(&self) -> Self
+    {
         match *self {
             // Volume
             Unit::Liter(x) => Unit::Liter(x),
@@ -94,7 +113,8 @@ impl Unit {
         }
     }
 
-    fn to_short_string(&self) -> String {
+    fn to_short_string(&self) -> String
+    {
         match *self {
             // Volume
             Unit::Liter(x) => format!("{:00} л.", x),
@@ -113,17 +133,10 @@ impl Unit {
     }
 }
 
-
-pub struct Recipe {
-    name: String,
-    description: String,
-    guide: String,
-    image_path: String,
-    ingredients: HashMap<String, Unit>,
-}
-
-impl Recipe {
-    pub fn to_json(&self) -> JsonValue {
+impl Recipe
+{
+    pub fn to_json(&self) -> JsonValue
+    {
         let mut tree = Object::new();
         tree.insert("name", JsonValue::String(self.name.clone()));
         tree.insert("description", JsonValue::String(self.description.clone()));
@@ -141,31 +154,34 @@ impl Recipe {
     }
 }
 
-
-pub struct JsonResponse {
-    value: json::JsonValue
-}
-
-impl JsonResponse {
-    fn new(json_value: json::JsonValue) -> Self {
+impl JsonResponse
+{
+    fn new(json_value: json::JsonValue) -> Self
+    {
         JsonResponse { value: json_value }
     }
 }
 
-impl From<JsonValue> for JsonResponse {
-    fn from(json_value: JsonValue) -> Self {
+impl From<JsonValue> for JsonResponse
+{
+    fn from(json_value: JsonValue) -> Self
+    {
         JsonResponse::new(json_value)
     }
 }
 
-impl ToString for JsonResponse {
-    fn to_string(&self) -> String {
+impl ToString for JsonResponse
+{
+    fn to_string(&self) -> String
+    {
         self.value.to_string()
     }
 }
 
-impl<'r> Responder<'r> for JsonResponse {
-    fn respond_to(self, request: &Request) -> Result<Response<'r>, Status> {
+impl<'r> Responder<'r> for JsonResponse
+{
+    fn respond_to(self, _request: &Request) -> Result<Response<'r>, Status>
+    {
         Response::build()
             .header(rocket::http::ContentType::JSON)
             .sized_body(Cursor::new(self.value.to_string()))
@@ -173,8 +189,10 @@ impl<'r> Responder<'r> for JsonResponse {
     }
 }
 
-
-pub fn zip_to_map<'a, T, KeyIter, ValueIter>(key_iter: KeyIter, value_iter: ValueIter) -> HashMap<T, T>
+pub fn zip_to_map<'a, T, KeyIter, ValueIter>(
+    key_iter: KeyIter,
+    value_iter: ValueIter,
+) -> HashMap<T, T>
     where
         T: 'a + Hash + Eq + Clone,
         KeyIter: Iterator<Item=&'a T>,
@@ -183,7 +201,8 @@ pub fn zip_to_map<'a, T, KeyIter, ValueIter>(key_iter: KeyIter, value_iter: Valu
     key_iter.cloned().zip(value_iter.cloned()).collect::<HashMap<T, T>>()
 }
 
-pub fn score_recipe(query: &HashMap<String, f32>, recipe: &Recipe) -> f32 {
+pub fn score_recipe(query: &HashMap<String, f32>, recipe: &Recipe) -> f32
+{
     let mut score = 0f32;
 
     for (needed_name, needed_amount) in &recipe.ingredients {
@@ -202,7 +221,8 @@ pub fn score_recipe(query: &HashMap<String, f32>, recipe: &Recipe) -> f32 {
 }
 
 #[get("/search/<query..>")]
-pub fn api_search(recipes: State<Vec<Recipe>>, query: PathBuf) -> JsonResponse {
+pub fn api_search(recipes: State<Vec<Recipe>>, query: PathBuf) -> JsonResponse
+{
     let mut response = Object::new();
     let mut found_recipes = Array::new();
 
@@ -306,12 +326,14 @@ pub fn api_search(recipes: State<Vec<Recipe>>, query: PathBuf) -> JsonResponse {
 
 /// WEB SERVER STUFF ///
 #[get("/all")]
-pub fn api_all_recipes(state: State<Vec<Recipe>>) -> JsonResponse {
+pub fn api_all_recipes(state: State<Vec<Recipe>>) -> JsonResponse
+{
     JsonResponse { value: JsonValue::from("{}") }
 }
 
 #[post("/addrecipe/<recipe>")]
-pub fn api_addrecipe(state: State<Vec<Recipe>>, recipe: String) {
+pub fn api_addrecipe(state: State<Vec<Recipe>>, recipe: String)
+{
     let maybe_recipe_object = json::parse(&recipe);
     if maybe_recipe_object.is_err() {
         println!("Couldn't parse json {}", recipe);
@@ -322,7 +344,8 @@ pub fn api_addrecipe(state: State<Vec<Recipe>>, recipe: String) {
 
 
 #[allow(dead_code)]
-fn main() {
+fn main()
+{
     let cfg = Config::build(Environment::Development)
         .address("0.0.0.0")
         .port(80)
