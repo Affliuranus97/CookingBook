@@ -220,86 +220,108 @@ pub fn score_recipe(query: &HashMap<String, f32>, recipe: &Recipe) -> f32
     score
 }
 
-#[get("/search/<query..>")]
-pub fn api_search(recipes: State<Vec<Recipe>>, query: PathBuf) -> JsonResponse
+pub fn parse_parameter_tuple(parameter: (String, String)) -> Option<(String, f32)>
 {
-    let mut response = Object::new();
-    let mut found_recipes = Array::new();
+    parse_parameter(parameter.0, parameter.1)
+}
 
+pub fn parse_parameter(name: String, amount_str: String) -> Option<(String, f32)>
+{
+    let maybe_space_position = amount_str.find('_');
+    let space_pos = if maybe_space_position.is_none() {
+        return None;
+    } else {
+        maybe_space_position.unwrap()
+    };
+
+    let maybe_amount = amount_str[..space_pos].parse::<f32>();
+    let amount = if maybe_amount.is_err() {
+        // Error
+        return None;
+    } else {
+        maybe_amount.unwrap()
+    };
+
+    let units_amount = match &amount_str[(space_pos + 1)..] {
+        // Volume
+        "liters" => Unit::Liter(amount),
+        "milliliters" => Unit::Milliliter(amount),
+        "tablespoons" => Unit::TableSpoon(amount),
+        "teaspoons" => Unit::TeaSpoon(amount),
+        "coffeespoon" => Unit::CoffeeSpoon(amount),
+
+        // Mass
+        "grams" => Unit::Gram(amount),
+        "kilograms" => Unit::Kilogram(amount),
+
+        // Other
+        "count" => Unit::Count(amount as i32),
+
+        // Error
+        _ => return None
+    };
+
+    if units_amount.value() == -1f32 {
+        return None;
+    }
+
+    Some((name, units_amount.to_si().value()))
+}
+
+pub fn parse_parameters(query: PathBuf) -> HashMap<String, f32>
+{
+    // PathBuf provides OsStr objects, that are clunky. Convert to normal Strings.
     let search_params = query.iter()
         .map(|x| x.to_string_lossy().to_string())
         .collect::<Vec<String>>();
 
-    let query_string_map: HashMap<String, String> = zip_to_map(
+    let search_string_map: HashMap<String, String> = zip_to_map(
         search_params.iter().step_by(2),
         search_params.iter().skip(1).step_by(2),
     );
 
-    let query_map = query_string_map.into_iter()
-        .filter_map(|(x, y)| {
-            let maybe_space_position = y.find('_');
+    search_string_map.into_iter().filter_map(parse_parameter_tuple).collect()
+}
 
-            if maybe_space_position.is_none() {
-                return None;
-            }
+pub fn has_invalid_amounts(query: &HashMap<String, f32>) -> bool
+{
+    return query.values().find(|&&x| x == -1f32).is_some();
+}
 
-            let space_pos = maybe_space_position.unwrap();
-            let maybe_amount = y[..space_pos].parse::<f32>();
-
-            let amount = if maybe_amount.is_err() {
-                // Error
-                return None;
-            } else {
-                maybe_amount.unwrap()
-            };
-
-            let units_amount = match &y[(space_pos + 1)..] {
-                // Volume
-                "liters" => Unit::Liter(amount),
-                "milliliters" => Unit::Milliliter(amount),
-                "tablespoons" => Unit::TableSpoon(amount),
-                "teaspoons" => Unit::TeaSpoon(amount),
-                "coffeespoon" => Unit::CoffeeSpoon(amount),
-
-                // Mass
-                "grams" => Unit::Gram(amount),
-                "kilograms" => Unit::Kilogram(amount),
-
-                // Other
-                "count" => Unit::Count(amount as i32),
-
-                // Error
-                _ => return None
-            };
-
-            if units_amount.value() == -1f32 {
-                return None;
-            }
-
-            Some((x, units_amount.to_si().value()))
-        })
-        .collect::<HashMap<_, _>>();
-
-
-    if query_map.values().find(|&&x| x == -1f32).is_some() {
-        // Malformed query
-        return JsonResponse { value: JsonValue::new_object() };
-    };
-
+pub fn score_all_recipes(
+    query: &HashMap<String, f32>,
+    recipes: &Vec<Recipe>,
+) -> Vec<(usize, &Recipe)>
+{
     let mut scored_recipes = recipes.iter().enumerate().collect::<Vec<_>>();
     let mut scores: Vec<f32> = Vec::new();
     scores.resize(scored_recipes.len(), 0f32);
 
     for (i, r) in &scored_recipes {
-        scores[*i] = score_recipe(&query_map, r);
+        scores[*i] = score_recipe(&query, r);
     }
 
-    scored_recipes.par_sort_by_key(|r| (scores[r.0] * 1000f32) as i32);
+    scored_recipes.sort_by_key(|r| (scores[r.0] * 1000f32) as i32);
 
     for (i, r) in scored_recipes.iter_mut() {
         *i = (scores[*i] * 1000f32) as usize;
     }
 
+    scored_recipes
+}
+
+#[get("/search/<query..>")]
+pub fn api_search(recipes: State<Vec<Recipe>>, query: PathBuf) -> JsonResponse
+{
+    let search_map: HashMap<String, f32> = parse_parameters(query);
+
+    if has_invalid_amounts(&search_map) {
+        return JsonResponse { value: JsonValue::new_object() };
+    }
+
+    let scored_recipes = score_all_recipes(&search_map, &recieps);
+
+    let mut found_recipes = Array::new();
     if !scored_recipes.is_empty() {
         let can_make_now: Vec<_> = scored_recipes.iter()
             .take_while(|&&r| r.0 <= 0)
@@ -320,6 +342,7 @@ pub fn api_search(recipes: State<Vec<Recipe>>, query: PathBuf) -> JsonResponse
         }
     }
 
+    let mut response = Object::new();
     response.insert("recipes", JsonValue::Array(found_recipes));
     JsonResponse { value: JsonValue::Object(response) }
 }
