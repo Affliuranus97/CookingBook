@@ -331,7 +331,7 @@ fn main()
 
     let rocket = rocket::custom(cfg)
         .manage(RwLock::new(recipes))
-        .mount("/", StaticFiles::new(r"C:\Stuff\Projects\CookingBook", Options::Index))
+        .mount("/", StaticFiles::new(r"C:\Stuff\Projects\CookingBook_Web", Options::Index))
         .mount("/api/", routes![api_search])
         .mount("/api/", routes![api_add_recipe])
         ;
