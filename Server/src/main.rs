@@ -4,23 +4,20 @@
 extern crate rocket;
 extern crate rocket_contrib;
 
-use std::io::Cursor;
 use std::path::PathBuf;
 use std::iter::*;
-use std::ffi::OsStr;
+use std::sync::RwLock;
 use std::hash::Hash;
+use std::fmt::{Formatter, Error};
 use std::collections::HashMap;
-use std::cmp::Ordering;
-use json::{JsonValue, Array};
-use json::object::Object;
-use rayon::slice::ParallelSliceMut;
-use rayon::iter::ParallelIterator;
-use rocket::{Request, Response, Config, State};
-use rocket::http::Status;
-use rocket::response::Responder;
+use rocket::{Config, State};
 use rocket::config::Environment;
+use rocket_contrib::json::Json;
 use rocket_contrib::serve::{Options, StaticFiles};
+use serde::{Serialize, Deserialize};
 
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum Unit
 {
     Liter(f32),
@@ -35,6 +32,7 @@ pub enum Unit
     Count(i32),
 }
 
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Recipe
 {
     name: String,
@@ -44,10 +42,7 @@ pub struct Recipe
     ingredients: HashMap<String, Unit>,
 }
 
-pub struct JsonResponse
-{
-    value: json::JsonValue
-}
+pub type Recipes = RwLock<Vec<Recipe>>;
 
 impl Unit
 {
@@ -68,32 +63,6 @@ impl Unit
         }
     }
 
-    pub fn name(&self) -> &'static str
-    {
-        match self {
-            // Volume
-            Unit::Liter(_) => "liters",
-            Unit::Milliliter(_) => "milliliters",
-            Unit::TableSpoon(_) => "tablespoons",
-            Unit::TeaSpoon(_) => "teaspoons",
-            Unit::CoffeeSpoon(_) => "coffeespoon",
-
-            // Mass
-            Unit::Gram(_) => "grams",
-            Unit::Kilogram(_) => "kilograms",
-
-            // Other
-            Unit::Count(_) => "count"
-        }
-    }
-
-    pub fn to_json(&self) -> JsonValue
-    {
-        let mut obj = Object::new();
-        obj.insert(self.name(), JsonValue::from(self.value()));
-        JsonValue::from(obj)
-    }
-
     pub fn to_si(&self) -> Self
     {
         match *self {
@@ -112,80 +81,18 @@ impl Unit
             Unit::Count(x) => Unit::Count(x),
         }
     }
-
-    fn to_short_string(&self) -> String
-    {
-        match *self {
-            // Volume
-            Unit::Liter(x) => format!("{:00} л.", x),
-            Unit::Milliliter(x) => format!("{:00} мл.", x),
-            Unit::TableSpoon(x) => format!("{:00} с.л.", x),
-            Unit::TeaSpoon(x) => format!("{:00} ч.л.", x),
-            Unit::CoffeeSpoon(x) => format!("{:00} к.л.", x),
-
-            // Mass
-            Unit::Gram(x) => format!("{} г.", x),
-            Unit::Kilogram(x) => format!("{} кг.", x),
-
-            // Other
-            Unit::Count(x) => format!("{} бр.", x),
-        }
-    }
 }
 
-impl Recipe
-{
-    pub fn to_json(&self) -> JsonValue
-    {
-        let mut tree = Object::new();
-        tree.insert("name", JsonValue::String(self.name.clone()));
-        tree.insert("description", JsonValue::String(self.description.clone()));
-        tree.insert("guide", JsonValue::String(self.guide.clone()));
-        tree.insert("image_path", JsonValue::String(self.image_path.clone()));
+impl std::fmt::Display for Recipe {
+    fn fmt(&self, f: &mut Formatter) -> Result<(), Error> {
+        let formatted = format!(
+            "Recipe[name={};description={};guide={}]",
+            self.name,
+            self.description,
+            self.guide,
+        );
 
-
-        let mut ingredients = Object::new();
-        for (ingredient, units) in &self.ingredients {
-            ingredients.insert(ingredient, units.to_json());
-        }
-
-        tree.insert("ingredients", JsonValue::from(ingredients));
-        JsonValue::Object(tree)
-    }
-}
-
-impl JsonResponse
-{
-    fn new(json_value: json::JsonValue) -> Self
-    {
-        JsonResponse { value: json_value }
-    }
-}
-
-impl From<JsonValue> for JsonResponse
-{
-    fn from(json_value: JsonValue) -> Self
-    {
-        JsonResponse::new(json_value)
-    }
-}
-
-impl ToString for JsonResponse
-{
-    fn to_string(&self) -> String
-    {
-        self.value.to_string()
-    }
-}
-
-impl<'r> Responder<'r> for JsonResponse
-{
-    fn respond_to(self, _request: &Request) -> Result<Response<'r>, Status>
-    {
-        Response::build()
-            .header(rocket::http::ContentType::JSON)
-            .sized_body(Cursor::new(self.value.to_string()))
-            .ok()
+        f.write_str(formatted.as_str())
     }
 }
 
@@ -307,19 +214,23 @@ pub fn score_all_recipes<'r>(
 }
 
 #[get("/search/<query..>")]
-pub fn api_search(recipes: State<Vec<Recipe>>, query: PathBuf) -> JsonResponse
+pub fn api_search(recipes_sync: State<Recipes>, query: PathBuf) -> Json<Vec<Recipe>>
 {
+    let recipes = recipes_sync.read().unwrap();
+
+    if query.iter().count() % 2 == 1 {
+        println!("[api][search] Odd number of arguments, skipping");
+        return Json(Vec::new());
+    }
+
     let search_map: HashMap<String, f32> = parse_parameters(query);
 
     if has_invalid_amounts(&search_map) {
-        return JsonResponse { value: JsonValue::new_object() };
+        return Json(Vec::new());
     }
-
     let scored_recipes: Vec<(f32, &Recipe)>
-        = score_all_recipes(&search_map, recipes.inner());
+        = score_all_recipes(&search_map, &*recipes);
 
-    let mut response = Object::new();
-    let mut found_recipes: Vec<JsonValue> = Array::new();
     if !scored_recipes.is_empty() {
         let can_make_now: Vec<_> = scored_recipes
             .iter()
@@ -327,42 +238,44 @@ pub fn api_search(recipes: State<Vec<Recipe>>, query: PathBuf) -> JsonResponse
             .map(|&r| r)
             .collect();
 
-
-        let iter = if can_make_now.is_empty() {
-            response.insert("can_make_any", JsonValue::Boolean(false));
-            scored_recipes.iter()
+        let can_make_any_recipe = !can_make_now.is_empty();
+        let recipe_iterator = if !can_make_any_recipe {
+            scored_recipes.into_iter()
         } else {
-            response.insert("can_make_any", JsonValue::Boolean(true));
-            can_make_now.iter()
+            can_make_now.into_iter()
         };
 
-        for &(score, recipe) in iter.take(128) {
-            found_recipes.push(recipe.to_json());
-        }
+        return Json(recipe_iterator.map(|x| x.1.clone()).collect());
     }
 
-    response.insert("recipes", JsonValue::Array(found_recipes));
-    JsonResponse { value: JsonValue::Object(response) }
+    return Json(Vec::new());
 }
+
 
 /// WEB SERVER STUFF ///
 #[get("/all")]
-pub fn api_all_recipes(state: State<Vec<Recipe>>) -> JsonResponse
+pub fn api_all_recipes(state: State<Recipes>) -> Json<Vec<Recipe>>
 {
-    JsonResponse { value: JsonValue::from("{}") }
+    return Json(state.read().unwrap().to_vec());
 }
 
-#[post("/addrecipe/<recipe>")]
-pub fn api_addrecipe(state: State<Vec<Recipe>>, recipe: String)
+#[post("/add_recipe", format = "json", data = "<recipe>")]
+pub fn api_add_recipe(recipes_sync: State<Recipes>, recipe: Json<Recipe>) -> Json<bool>
 {
-    let maybe_recipe_object = json::parse(&recipe);
-    if maybe_recipe_object.is_err() {
-        println!("Couldn't parse json {}", recipe);
+    let real_recipe: Recipe = recipe.into_inner();
+    let is_name_taken = recipes_sync.read().unwrap().iter()
+        .find(|&r| r.name == real_recipe.name)
+        .is_some();
+
+    if is_name_taken {
+        let mut recipes = recipes_sync.write().unwrap();
+        println!("[api][add_recipe] Adding new recipe {}", real_recipe);
+        (*recipes).push(real_recipe);
     }
 
-//    JsonResponse::from(JsonValue::new_object());
-}
 
+    return Json(!is_name_taken);
+}
 
 #[allow(dead_code)]
 fn main()
@@ -386,8 +299,8 @@ fn main()
     musaka_ingredients.insert("Чубрица".to_lowercase(), Unit::TeaSpoon(1f32));
 
 
-    musaka_ingredients.iter_mut().for_each(|(x, y)| {
-        *y = y.to_si();
+    musaka_ingredients.iter_mut().for_each(|(_name, amount)| {
+        *amount = amount.to_si();
     });
 
     let mut recipes: Vec<Recipe> = Vec::new();
@@ -401,6 +314,12 @@ fn main()
 
     let mut musaka_ingredients: HashMap<String, Unit> = HashMap::new();
     musaka_ingredients.insert("чушки".to_lowercase(), Unit::Count(4));
+
+    musaka_ingredients
+        .iter_mut()
+        .for_each(|(_ingredient, amount)| {
+            *amount = amount.to_si();
+        });
     recipes.push(Recipe {
         name: "Мусака2".to_string(),
         description: "Best food ever.".to_string(),
@@ -411,11 +330,30 @@ fn main()
 
 
     let rocket = rocket::custom(cfg)
-        .manage(recipes)
+        .manage(RwLock::new(recipes))
         .mount("/", StaticFiles::new(r"C:\Stuff\Projects\CookingBook", Options::Index))
         .mount("/api/", routes![api_search])
-        .mount("/api/", routes![api_addrecipe])
+        .mount("/api/", routes![api_add_recipe])
         ;
 
     rocket.launch();
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::thread;
+    use std::thread::JoinHandle;
+
+    fn start_web_server() -> JoinHandle<()> {
+        thread::spawn(main)
+    }
+
+    #[test]
+    fn test_web_server() {
+        let server = start_web_server();
+
+//        use rocket_contrib::helmet::
+    }
 }
