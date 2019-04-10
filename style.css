@@ -316,7 +316,8 @@ body {
     padding: 5px 5px 5px 5px;
     height: 180px;
     border-radius: 12px 12px 0 0;
-    background-image: url("http://www.gotvetesmen.com/gallery/albums/userpics/10005/Tatarsko_kyufte.jpg") no-repeat;
+    background-image: url("http://www.gotvetesmen.com/gallery/albums/userpics/10005/Tatarsko_kyufte.jpg");
+    background-repeat: no-repeat;
 }
 
 .wrapper .recipeObject .title {
