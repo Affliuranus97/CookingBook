@@ -312,6 +312,57 @@ body {
 	z-index: 1;
 }
 
+.wrapper .recipeObject .image {
+    padding: 5px 5px 5px 5px;
+    height: 180px;
+    border-radius: 12px 12px 0 0;
+    background-image: url("http://www.gotvetesmen.com/gallery/albums/userpics/10005/Tatarsko_kyufte.jpg");
+}
+
+.wrapper .recipeObject .title {
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    height: 60px;
+    font: 14pt Arial;
+    color: #FFF;
+    border-top: 4px solid #EEE;    
+}
+
+.wrapper .recipeObject .description {
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    height: 60px;
+    font: 14pt Arial;
+    color: #FFF;
+    border-top: 4px solid #EEE;    
+}
+
+.wrapper .recipeObject .ingredients {
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    height: 60px;
+    font: 14pt Arial;
+    color: #FFF;
+    border-top: 4px solid #EEE;    
+}
+
+.wrapper .recipeObject .guide {
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    height: 60px;
+    font: 14pt Arial;
+    color: #FFF;
+    border-top: 4px solid #EEE;    
+}
+
 
 
 

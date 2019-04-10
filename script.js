@@ -14,7 +14,7 @@ function createBigCards(object){
     for (let i of Object.entries(object)){
         ingredients += objects["ingredients"];
     }
-    return '<div class = "bigCard" id = "recipe_' + object["id"] + '"><div class = "image"></div>' +
+    return '<div class = "image"></div>' +
            '<div class = "title">' + object["name"] + '</div>' + 
            '<div class = "description">' + object["description"] + '</div>' +
            '<div class = "ingredients">' + ingredients + '</div>' +
