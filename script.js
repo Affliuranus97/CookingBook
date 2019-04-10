@@ -1,6 +1,7 @@
 var data = [];
 
-$("#srchBar").keypress(function(e){
+$("#srchBar").on('input', function(e){
+    console.log((this).val());
     $.ajax({
         url: "api/search/sol/100_g",
         method: "GET",
@@ -10,7 +11,7 @@ $("#srchBar").keypress(function(e){
         console.log(data);
         fillCards(data);
     })
-});   
+});
     
 function createCard(object){
 	return '<div class="card" id="recipe_' + object["id"] + '"><div class="image"></div>' +
