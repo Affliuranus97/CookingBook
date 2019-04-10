@@ -11,7 +11,7 @@ function createCard(object){
 
 function createBigCards(object){
     let ingredients = "";
-    for (let i of Object.entries(objects)){
+    for (let i of Object.entries(object)){
         ingredients += objects["ingredients"];
     }
     return '<div class = "bigCard" id = "recipe_' + object["id"] + '"><div class = "image"></div>' +
