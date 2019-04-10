@@ -8,13 +8,15 @@ $("#srchBar").on('keyup', function(e){
     let string = $(this).val();
     let i = string.indexOf(" ");
     if (i == -1){
-        console.log("error");
+        console.log("not space");
+        fillCards(data);
         return;
     }
     string = string.replaceAt(i, "/");
     i = string.indexOf(" ");
     if (i == -1){
-        console.log("error");
+        console.log("not space");
+        fillCards(data);
         return;
     }
     string = string.replaceAt(i, "_");
