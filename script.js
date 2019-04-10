@@ -53,7 +53,7 @@ function fillCards(objects){
 	$(".results").html(cardString);
 }
 
-fillCards(data);
+//fillCards(data);
 
 //TODO: id.split("_"), vzemam vtoriq string ot spisuka, pravq go na int i tursq
 //v obekta porednostta
