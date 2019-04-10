@@ -35,6 +35,7 @@ pub enum Unit
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Recipe
 {
+    id: i32,
     name: String,
     description: String,
     guide: String,
@@ -305,6 +306,7 @@ fn main()
 
     let mut recipes: Vec<Recipe> = Vec::new();
     recipes.push(Recipe {
+        id: 0,
         name: "Мусака".to_string(),
         description: "Best food ever.".to_string(),
         guide: "I have no idea how to make it, but it is incredible. Only women know, and women don't tell.".to_string(),
@@ -321,6 +323,7 @@ fn main()
             *amount = amount.to_si();
         });
     recipes.push(Recipe {
+        id: 1,
         name: "Мусака2".to_string(),
         description: "Best food ever.".to_string(),
         guide: "I have no idea how to make it, but it is incredible. Only women know, and women don't tell.".to_string(),
