@@ -1,4 +1,24 @@
-var data = [
+
+
+//var data = JSON.parse(JsonResponse);
+
+$("#srchBar").keypress(function(e){
+    $.ajax({
+        url: "api/search/sol/100_g",
+        method; "GET",
+    })
+    .done(function(){
+        alert("success");
+    })
+    .fail(function(){
+        alert("error");
+    })
+    .always(function(){
+        alert("complete");
+    });
+});
+
+/* [
     //array first item
 	{
         //object values
@@ -18,10 +38,10 @@ var data = [
 		"instruction": "supa instrukcii"
 	}
 	];
-	    
+*/	    
     
-function createCard(id, object){
-	return '<div class="card" id="recipe_' + id + '"><div class="image"></div>' +
+function createCard(object){
+	return '<div class="card" id="recipe_' + object["id"] + '"><div class="image"></div>' +
 	'<div class="title">' + object["name"] + '</div></div>';
 };
 
@@ -42,17 +62,19 @@ function fillRecipeCards(objects){
     let cardString = "";
     for(let i = 0; i < objects.length; i++){
         let idString = objects[i]["id"];
-        let id = getObjectId(idString);
-        cardString += createCard(id, objects[i]);
+//        let id = getObjectId(idString);
+        cardString += createCard(objects[i]);
     }
     $(".results").html(cardString);
 }
 
+/*
 function getObjectId(idString){
     idString = idString.split("_");
     let id = parseInt(idString[1]);
     return id;
 }
+*/
 
 $(".card").click(function(){
 	$(".wrapper").addClass("visible");
