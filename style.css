@@ -319,6 +319,7 @@ body {
     background-image: url("http://www.gotvetesmen.com/gallery/albums/userpics/10005/Tatarsko_kyufte.jpg");
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 80% 80%;
 }
 
 .wrapper .recipeObject .title {
