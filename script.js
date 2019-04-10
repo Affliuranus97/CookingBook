@@ -1,6 +1,4 @@
-
-
-//var data = JSON.parse(JsonResponse);
+var data = [];
 
 $("#srchBar").keypress(function(e){
     $.ajax({
@@ -10,30 +8,9 @@ $("#srchBar").keypress(function(e){
     .then(function(data, status){
         console.log(status);
         console.log(data);
+        fillCards(data);
     })
-});
-
-/* [
-    //array first item
-	{
-        //object values
-		"id": 0,
-		"name": "kiufet",
-		"description": "blq blq desc",
-		"ingredients": [{"name": "sol", "amount": "100"}],
-		"instruction": "instrukcii"
-	},
-    //array second item
-	{
-        //object values
-		"id": 1,
-		"name": "supa",
-		"description": "supa desc",
-		"ingredients": [{"name": "sol", "amount": "100"},{"name": "voda", "amount": "200"}],
-		"instruction": "supa instrukcii"
-	}
-	];
-*/	    
+});   
     
 function createCard(object){
 	return '<div class="card" id="recipe_' + object["id"] + '"><div class="image"></div>' +
@@ -48,28 +25,14 @@ function fillCards(objects){
 	$(".results").html(cardString);
 }
 
-//fillCards(data);
-
-//TODO: id.split("_"), vzemam vtoriq string ot spisuka, pravq go na int i tursq
-//v obekta porednostta
-
 function fillRecipeCards(objects){
     let cardString = "";
     for(let i = 0; i < objects.length; i++){
         let idString = objects[i]["id"];
-//        let id = getObjectId(idString);
         cardString += createCard(objects[i]);
     }
     $(".results").html(cardString);
 }
-
-/*
-function getObjectId(idString){
-    idString = idString.split("_");
-    let id = parseInt(idString[1]);
-    return id;
-}
-*/
 
 $(".card").click(function(){
 	$(".wrapper").addClass("visible");
