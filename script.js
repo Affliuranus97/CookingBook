@@ -23,6 +23,7 @@ function createBigCards(object){
 
 function fillCards(objects){
 	let cardString = "";
+    let bigCardString = "";
 	for(let i = 0; i < objects.length; i++){
 		cardString += createCard(objects[i]);
 	}
@@ -35,9 +36,10 @@ function fillCards(objects){
     $(".wrapper").click(function(e){
         if (e.target === this) {
             $(this).removeClass("visible");
-            cardString = createBigCards(objects);
+            bigCardString = createBigCards(objects);
+            $(".recipeObject").html(cardString);
         }
-    }).html(cardString);
+    });  
 }
 
 function fillRecipeCards(objects){
