@@ -4,7 +4,7 @@ String.prototype.replaceAt=function(index, replacement) {
     return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }
 
-$("#srchBar").on('input', function(e){
+$("#srchBar").on('keydown', function(e){
     let string = $(this).val();
     let i = string.indexOf(" ");
     if (i == -1){
