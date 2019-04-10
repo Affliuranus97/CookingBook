@@ -32,9 +32,15 @@ function fillCards(objects){
     
     $(".card").click(function(){
         $(".wrapper").addClass("visible");
-        console.log($(this).attr('id'));
-        bigCardString = createBigCards(objects);
-        $(".recipeObject").html(bigCardString);
+        let id = parseInt($(this).attr('id').split("_")[1]);
+        for(let i = 0; i < objects.length; i++){
+            let idString = objects[i]["id"];
+            if (idString == id){
+                bigCardString = createBigCards(objects[id]);
+                $(".recipeObject").html(bigCardString);
+                break;
+            }
+        }
     });
 
     $(".wrapper").click(function(e){
