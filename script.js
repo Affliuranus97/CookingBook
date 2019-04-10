@@ -12,7 +12,7 @@ function createCard(object){
 function createBigCards(object){
     let ingredients = "";
     for (let i of Object.entries(object)){
-        ingredients += objects["ingredients"];
+        ingredients += object["ingredients"];
     }
     return '<div class = "image"></div>' +
            '<div class = "title">' + object["name"] + '</div>' + 
