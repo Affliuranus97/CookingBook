@@ -32,6 +32,7 @@ function fillCards(objects){
     
     $(".card").click(function(){
         $(".wrapper").addClass("visible");
+        console.log($(this).id());
         bigCardString = createBigCards(objects);
         $(".recipeObject").html(bigCardString);
     });
