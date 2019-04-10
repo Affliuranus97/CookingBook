@@ -72,9 +72,10 @@ $("#srchBar").on('keyup', function(e){
         url: "api/search/" + string,
         method: "GET",
     })
-    .then(function(data, status){
+    .then(function(info, status){
         console.log(status);
-        console.log(data);
+        console.log(info);
+        data = info;
         fillCards(data);
     })
 });
