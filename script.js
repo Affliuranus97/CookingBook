@@ -31,13 +31,13 @@ function fillCards(objects){
     
     $(".card").click(function(){
         $(".wrapper").addClass("visible");
+        bigCardString = createBigCards(objects);
+        $(".recipeObject").html(cardString);
     });
 
     $(".wrapper").click(function(e){
         if (e.target === this) {
             $(this).removeClass("visible");
-            bigCardString = createBigCards(objects);
-            $(".recipeObject").html(cardString);
         }
     });  
 }
