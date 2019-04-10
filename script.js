@@ -9,6 +9,18 @@ function createCard(object){
 	'<div class = "title">' + object["name"] + '</div></div>';
 };
 
+function createBigCards(object){
+    let ingredients = "";
+    for (let i of Object.entries(objects)){
+        ingredients += objects["ingredients"];
+    }
+    return '<div class = "bigCard" id = "recipe_' + object["id"] + '"><div class = "image"></div>' +
+           '<div class = "title">' + object["name"] + '</div>' + 
+           '<div class = "description">' + object["description"] + '</div>' +
+           '<div class = "ingredients">' + ingredients + '</div>' +
+           '<div class = "guide">' + object["guide"] + '</div></div>';
+}
+
 function fillCards(objects){
 	let cardString = "";
 	for(let i = 0; i < objects.length; i++){
@@ -23,17 +35,9 @@ function fillCards(objects){
     $(".wrapper").click(function(e){
         if (e.target === this) {
             $(this).removeClass("visible");
-            let ingredients = "";
-            for (let i of Object.entries(objects)){
-                ingredients += objects["ingredients"];
-            }
-            return '<div class = "bigCard" id = "recipe_' + object["id"] + '"><div class = "image"></div>' +
-            '<div class = "title">' + object["name"] + '</div>' + 
-            '<div class = "description">' + object["description"] + '</div>' +
-            '<div class = "ingredients">' + ingredients + '</div>' +
-            '<div class = "guide">' + object["guide"] + '</div></div>';
+            cardString = createBigCards(objects);
         }
-    });
+    }).html(cardString);
 }
 
 function fillRecipeCards(objects){
