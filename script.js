@@ -11,7 +11,7 @@ $("#srchBar").on('input', function(e){
         console.log("error");
         return;
     }
-    string = string.replaceAt(i, "/")
+    string = string.replaceAt(i, "/");
     i = string.indexOf(" ");
     if (i == -1){
         console.log("error");
