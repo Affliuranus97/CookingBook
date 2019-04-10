@@ -7,15 +7,10 @@ $("#srchBar").keypress(function(e){
         url: "api/search/sol/100_g",
         method: "GET",
     })
-    .done(function(){
-        alert("success");
+    .then(function(data, status){
+        console.log(status);
+        console.log(data);
     })
-    .fail(function(){
-        alert("error");
-    })
-    .always(function(){
-        alert("complete");
-    });
 });
 
 /* [
