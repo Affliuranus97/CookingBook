@@ -5,7 +5,7 @@
 $("#srchBar").keypress(function(e){
     $.ajax({
         url: "api/search/sol/100_g",
-        method; "GET",
+        method: "GET",
     })
     .done(function(){
         alert("success");
