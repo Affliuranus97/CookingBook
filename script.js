@@ -10,6 +10,7 @@ function createCard(object){
 };
 
 function createBigCards(object){
+    console.log(object);
     let ingredients = "";
     for (let i of Object.entries(object)){
         ingredients += object["ingredients"];
