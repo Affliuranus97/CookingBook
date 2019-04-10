@@ -5,8 +5,8 @@ String.prototype.replaceAt=function(index, replacement) {
 }
     
 function createCard(object){
-	return '<div class="card" id="recipe_' + object["id"] + '"><div class="image"></div>' +
-	'<div class="title">' + object["name"] + '</div></div>';
+	return '<div class = "card" id = "recipe_' + object["id"] + '"><div class = "image"></div>' +
+	'<div class = "title">' + object["name"] + '</div></div>';
 };
 
 function fillCards(objects){
@@ -23,6 +23,15 @@ function fillCards(objects){
     $(".wrapper").click(function(e){
         if (e.target === this) {
             $(this).removeClass("visible");
+            let ingredients = "";
+            for (let i of Object.entries(objects)){
+                ingredients += objects["ingredients"];
+            }
+            return '<div class = "bigCard" id = "recipe_' + object["id"] + '"><div class = "image"></div>' +
+            '<div class = "title">' + object["name"] + '</div>' + 
+            '<div class = "description">' + object["description"] + '</div>' +
+            '<div class = "ingredients">' + ingredients + '</div>' +
+            '<div class = "guide">' + object["guide"] + '</div></div>';
         }
     });
 }
