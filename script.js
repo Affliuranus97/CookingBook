@@ -1,5 +1,9 @@
 var data = [];
 
+String.prototype.replaceAt=function(index, replacement) {
+    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+}
+
 $("#srchBar").on('input', function(e){
     let string = $(this).val();
     let i = string.indexOf(" ");
@@ -7,13 +11,13 @@ $("#srchBar").on('input', function(e){
         console.log("error");
         return;
     }
-    string[i] = "/";
+    string = string.replaceAt(i, "/")
     i = string.indexOf(" ");
     if (i == -1){
         console.log("error");
         return;
     }
-    string[i] = "_";
+    string = string.replaceAt(i, "_");
     $.ajax({
         url: "api/search/" + string,
         method: "GET",
