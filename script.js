@@ -15,6 +15,16 @@ function fillCards(objects){
 		cardString += createCard(objects[i]);
 	}
 	$(".results").html(cardString);
+    
+    $(".card").click(function(){
+        $(".wrapper").addClass("visible");
+    });
+
+    $(".wrapper").click(function(e){
+        if (e.target === this) {
+            $(this).removeClass("visible");
+        }
+    });
 }
 
 function fillRecipeCards(objects){
@@ -26,15 +36,6 @@ function fillRecipeCards(objects){
     $(".results").html(cardString);
 }
 
-$(".card").click(function(){
-	$(".wrapper").addClass("visible");
-});
-
-$(".wrapper").click(function(e){
-	if (e.target === this) {
-		$(this).removeClass("visible");
-	}
-});
 
 $("#srchBar").on('keyup', function(e){
     let string = $(this).val();
