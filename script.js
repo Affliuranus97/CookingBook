@@ -1,9 +1,8 @@
 var data = [];
 
 $("#srchBar").on('input', function(e){
-    console.log($(this).val());
     $.ajax({
-        url: "api/search/sol/100_g",
+        url: "api/search/" + ($(this).val()),
         method: "GET",
     })
     .then(function(data, status){
