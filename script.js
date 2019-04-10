@@ -3,33 +3,6 @@ var data = [];
 String.prototype.replaceAt=function(index, replacement) {
     return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }
-
-$("#srchBar").on('keyup', function(e){
-    let string = $(this).val();
-    let i = string.indexOf(" ");
-    if (i == -1){
-        console.log("not space");
-        fillCards(data);
-        return;
-    }
-    string = string.replaceAt(i, "/");
-    i = string.indexOf(" ");
-    if (i == -1){
-        console.log("not space");
-        fillCards(data);
-        return;
-    }
-    string = string.replaceAt(i, "_");
-    $.ajax({
-        url: "api/search/" + string,
-        method: "GET",
-    })
-    .then(function(data, status){
-        console.log(status);
-        console.log(data);
-        fillCards(data);
-    })
-});
     
 function createCard(object){
 	return '<div class="card" id="recipe_' + object["id"] + '"><div class="image"></div>' +
@@ -61,4 +34,31 @@ $(".wrapper").click(function(e){
 	if (e.target === this) {
 		$(this).removeClass("visible");
 	}
+});
+
+$("#srchBar").on('keyup', function(e){
+    let string = $(this).val();
+    let i = string.indexOf(" ");
+    if (i == -1){
+        console.log("not space");
+        fillCards(data);
+        return;
+    }
+    string = string.replaceAt(i, "/");
+    i = string.indexOf(" ");
+    if (i == -1){
+        console.log("not space");
+        fillCards(data);
+        return;
+    }
+    string = string.replaceAt(i, "_");
+    $.ajax({
+        url: "api/search/" + string,
+        method: "GET",
+    })
+    .then(function(data, status){
+        console.log(status);
+        console.log(data);
+        fillCards(data);
+    })
 });
