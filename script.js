@@ -1,8 +1,21 @@
 var data = [];
 
 $("#srchBar").on('input', function(e){
+    let string = $(this).val();
+    let i = string.indexOf(" ");
+    if (i == -1){
+        console.log("error");
+        return;
+    }
+    string[i] = "/";
+    i = string.indexOf(" ");
+    if (i == -1){
+        console.log("error");
+        return;
+    }
+    string[i] = "_";
     $.ajax({
-        url: "api/search/" + ($(this).val()),
+        url: "api/search/" + string,
         method: "GET",
     })
     .then(function(data, status){
