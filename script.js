@@ -151,6 +151,7 @@ $("#srchBar").on('keyup', function(e){
     string = string.replaceAt(i, "_");
     let subString = string.substr(i + 1, string.length);
     string = string.substr(0, i + 1) + unitsMap[subString];
+    console.log(string);
     $.ajax({
         url: "api/search/" + string,
         method: "GET",
