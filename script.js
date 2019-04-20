@@ -22,14 +22,14 @@ var unitsMap = {
 };
 
 var reverseUnits = {
-    Gram: "гр";
-    Kilogram: "кг";
-    Milliliter: "мл";
-    Liter: "л";
-    TableSpoon: "сл";
-    TeaSpoon: "чл";
-    CoffeeSpoon: "кл";
-    Count: "бр";
+    Gram: "гр",
+    Kilogram: "кг",
+    Milliliter: "мл",
+    Liter: "л",
+    TableSpoon: "сл",
+    TeaSpoon: "чл",
+    CoffeeSpoon: "кл",
+    Count: "бр"
 };
 
 String.prototype.replaceAt=function(index, replacement) {
@@ -46,7 +46,7 @@ function createBigCards(object){
     let ingredients = "";
     for (let i of Object.entries(object["ingredients"])){
         for (let k of Object.entries(i[1])){
-			ingredients += i[0] + " " + k[1] + " " + reverseUnits[k[0]];	
+			ingredients += i[0] + " " + k[1] + " " + reverseUnits[k[0]];
         }
     }
     return '<div class = "image"></div>' +
