@@ -148,7 +148,7 @@ function fillNewRecipeArray(){
         singleIngredient += unitsMap[parts[parts.length - 1]];
         */
         if (!isNaN(line[line.length - 1])){
-            for (let j = 0; j < line.length - 2; j++){
+            for (let j = 0; j < line.length - 1; j++){
                 ingredient += line[j] + " ";
             }
             ingredient.trim();
@@ -156,7 +156,7 @@ function fillNewRecipeArray(){
             amount = line[line.length - 1];
         }
         else {
-            for (let j = 0; j < line.length - 3; j++){
+            for (let j = 0; j < line.length - 2; j++){
                 ingredient += line[j] + " ";
             }
             ingredient.trim();
