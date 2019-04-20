@@ -150,7 +150,7 @@ $("#srchBar").on('keyup', function(e){
         singleIngredient += unitsMap[parts[parts.length - 1]];
         resultString += singleIngredient + "/";
     }
-    resultString = resultString.subString(0, resultString.length - 1);
+    resultString = resultString.substr(0, resultString.length - 1);
     console.log(resultString);
     $.ajax({
         url: "api/search/" + string,
