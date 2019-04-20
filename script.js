@@ -1,5 +1,5 @@
 var data = [];
-
+var newRecipe = {};
 // dobavqne na zaqvka po post sus json vutre za dobavqne na recepti
 
 String.prototype.replaceAt=function(index, replacement) {
@@ -87,5 +87,21 @@ $("#srchBar").on('keyup', function(e){
         console.log(info);
         data = info;
         fillCards(data);
+    })
+});
+
+$("#add").click(function(e){
+    $ajax({
+        method: "POST",
+        url: "api/add_recipe",
+        data: JSON.stringify(newRecipe),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        failure: function(error){
+            console.log(error);
+        }
+        success: function(data){
+            console.log(data);
+        }
     })
 });
