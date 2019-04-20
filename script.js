@@ -212,6 +212,12 @@ $("#add").click(function(e){
         },
         success: function(data){
             console.log(data);
+            window.alert("Recipe successfully added!");
+            $("#recipeName").trigger('reset');
+            $("#descriptionArea").trigger('reset');
+            $("#ingredientsArea").trigger('reset');
+            $("#instructionArea").trigger('reset');
+            $("#recipeImage").trigger('reset');
         }
     })
 });
