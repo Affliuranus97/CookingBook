@@ -153,7 +153,7 @@ $("#srchBar").on('keyup', function(e){
     resultString = resultString.substr(0, resultString.length - 1);
     console.log(resultString);
     $.ajax({
-        url: "api/search/" + string,
+        url: "api/search/" + resultString,
         method: "GET",
     })
     .then(function(info, status){
