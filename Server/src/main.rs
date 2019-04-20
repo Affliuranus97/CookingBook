@@ -152,15 +152,15 @@ pub fn parse_parameter(name: String, amount_str: String) -> Option<(String, f32)
 
     let units_amount = match &amount_str[(space_pos + 1)..] {
         // Volume
-        "liters" => Unit::Liter(amount),
-        "milliliters" => Unit::Milliliter(amount),
-        "tablespoons" => Unit::TableSpoon(amount),
-        "teaspoons" => Unit::TeaSpoon(amount),
+        "liter" => Unit::Liter(amount),
+        "milliliter" => Unit::Milliliter(amount),
+        "tablespoon" => Unit::TableSpoon(amount),
+        "teaspoon" => Unit::TeaSpoon(amount),
         "coffeespoon" => Unit::CoffeeSpoon(amount),
 
         // Mass
-        "grams" => Unit::Gram(amount),
-        "kilograms" => Unit::Kilogram(amount),
+        "gram" => Unit::Gram(amount),
+        "kilogram" => Unit::Kilogram(amount),
 
         // Other
         "count" => Unit::Count(amount as i32),
