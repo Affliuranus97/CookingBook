@@ -84,8 +84,8 @@ function fillNewRecipeArray(){
     let Name = $("#recipeName").val();
     let Description = $("#descriptionArea").val();
     let Ingredients = {};
-    let Guide = $("#instrucionArea").val();
-    let Image;
+    let Guide = $("#instructionArea").val();
+    let Image = "";
     let ingredientsValue = $("#ingredientsArea").val().split(",");
     for (i in ingredientsValue){
         let ingredient;
