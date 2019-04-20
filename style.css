@@ -31,6 +31,28 @@ body {
     padding: 10px;
 }
 
+.recipeName {
+    resize: none;
+    width: 25em;
+    padding: 7px;
+    font-family: Avantgarde;
+    font-style: italic;
+    font-size: 16px;
+    color: black;
+    background: #ffcc99;
+}
+
+.recipeImage {
+    resize: none;
+    width: 25em;
+    padding: 7px;
+    font-family: Avantgarde;
+    font-style: italic;
+    font-size: 16px;
+    color: black;
+    background: #ffcc99;
+}
+
 .area {
     resize: none;
     width: 25em;
@@ -62,6 +84,14 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 200px 200px;
+}
+
+.recipeName::placeholder {
+    color: black;
+}
+
+.recipeImage::placeholder {
+    color: black;
 }
 
 .area::placeholder {
@@ -287,7 +317,6 @@ body {
     padding: 5px 5px 5px 5px;
     height: 180px;
     border-radius: 12px 12px 0 0;
-    background-image: url("http://www.gotvetesmen.com/gallery/albums/userpics/10005/Tatarsko_kyufte.jpg");
 }
 
 .results .card .title {
@@ -335,7 +364,6 @@ body {
     padding: 5px 5px 5px 5px;
     height: 180px;
     border-radius: 12px 12px 0 0;
-    background-image: url("http://www.gotvetesmen.com/gallery/albums/userpics/10005/Tatarsko_kyufte.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
