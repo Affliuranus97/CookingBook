@@ -139,14 +139,6 @@ function fillNewRecipeArray(){
         let unit = "";
         let amount = 0;
         let line = ingredientsValue[i].trim().split(" ");
-        /*
-        for (let k = 0; k < (parts.length - 2); k++){
-            singleIngredient += parts[k] + " ";
-        }
-        singleIngredient = singleIngredient.trim();
-        singleIngredient += parts[parts.length - 2];
-        singleIngredient += unitsMap[parts[parts.length - 1]];
-        */
         if (!isNaN(line[line.length - 1])){
             for (let j = 0; j < line.length - 1; j++){
                 ingredient += line[j] + " ";
