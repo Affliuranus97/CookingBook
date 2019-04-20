@@ -82,7 +82,7 @@ function createBigCards(object){
         }
     }
     ingredients = ingredients.substr(0, ingredients.length - 2);
-    return '<div class = "image"></div>' +
+    return '<div class = "image" style = "background-image: url(' + object["image_path"] + ')"></div>' +
            '<div class = "title">' + object["name"] + '</div>' + 
            '<div class = "description">' + object["description"] + '</div>' +
            '<div class = "ingredients">' + ingredients + '</div>' +
