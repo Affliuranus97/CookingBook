@@ -147,10 +147,12 @@ $("#srchBar").on('keyup', function(e){
 
 $("#add").click(function(e){
     let newRecipe = fillNewRecipeArray();
+    let jsonLog = JSON.stringify(newRecipe);
+    console.log(jsonLog);
     $.ajax({
         method: "POST",
         url: "api/add_recipe",
-        data: JSON.stringify(newRecipe),
+        data: jsonLog,
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         failure: function(error){
