@@ -36,6 +36,26 @@ String.prototype.replaceAt = function(index, replacement) {
     return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }
     
+function unitConveter(unitType, amount){
+    if (unitType == "Liter"){
+        amount *= 1000;
+		if (amount <= 25 && amount%5 == 0){
+            return amount/5 + " чл";
+        }
+        if (amount <= 75 && amount%15 == 0){
+            return amount/15 + " сл";
+        }
+        if (amount <= 10 && amount%2 == 0){
+            return amount/2 + " кл";
+        }
+        if (amount < 1000){
+            return amount + " мл";
+        }
+        return amount/1000 + " л";
+    }
+    return amount + " " + unitType;
+}    
+    
 function createCard(object){
 	return '<div class = "card" id = "recipe_' + object["id"] + '"><div class = "image"></div>' +
 	'<div class = "title">' + object["name"] + '</div></div>';
@@ -46,7 +66,7 @@ function createBigCards(object){
     let ingredients = "";
     for (let i of Object.entries(object["ingredients"])){
         for (let k of Object.entries(i[1])){
-			ingredients += i[0] + " " + k[1] + " " + reverseUnits[k[0]] + ", ";
+			ingredients += i[0] + " " + unitConveter(k[1], k[0]) + ", ";
         }
     }
     ingredients = ingredients.substr(0, ingredients.length - 2);
