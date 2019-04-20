@@ -66,7 +66,7 @@ function createBigCards(object){
     let ingredients = "";
     for (let i of Object.entries(object["ingredients"])){
         for (let k of Object.entries(i[1])){
-			ingredients += i[0] + " " + unitConveter(k[1], k[0]) + ", ";
+			ingredients += i[0] + " " + unitConveter(k[0], k[1]) + ", ";
         }
     }
     ingredients = ingredients.substr(0, ingredients.length - 2);
