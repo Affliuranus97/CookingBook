@@ -1,5 +1,7 @@
 var data = [];
 
+// dobavqne na zaqvka po post sus json vutre za dobavqne na recepti
+
 String.prototype.replaceAt=function(index, replacement) {
     return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }
