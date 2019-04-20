@@ -181,7 +181,7 @@ pub fn parse_parameters(query: PathBuf) -> HashMap<String, f32>
     // PathBuf provides OsStr objects, that are clunky. Convert
     // to normal Strings.
     let search_params = query.iter()
-        .map(|x| x.to_string_lossy().to_string())
+        .map(|x| x.to_string_lossy().to_string().to_lowercase())
         .collect::<Vec<String>>();
 
     let search_string_map: HashMap<String, String> = zip_to_map(
@@ -240,10 +240,12 @@ pub fn api_search(recipes_sync: State<Recipes>, query: PathBuf) -> Json<Vec<Reci
             .collect();
 
         let can_make_any_recipe = !can_make_now.is_empty();
-        let recipe_iterator = if !can_make_any_recipe {
-            scored_recipes.into_iter()
-        } else {
+        let recipe_iterator = if can_make_any_recipe {
+            println!("Can make some recipes");
             can_make_now.into_iter()
+        } else {
+            println!("Couldn't make any recipes");
+            scored_recipes.into_iter()
         };
 
         return Json(recipe_iterator.map(|x| x.1.clone()).collect());
@@ -286,6 +288,7 @@ fn main()
         .unwrap();
 
     let mut musaka_ingredients: HashMap<String, Unit> = HashMap::new();
+    musaka_ingredients.insert("Вода".to_lowercase(), Unit::Milliliter(800f32));
     musaka_ingredients.insert("Кайма".to_lowercase(), Unit::Gram(500f32));
     musaka_ingredients.insert("Картофи".to_lowercase(), Unit::Kilogram(1f32));
     musaka_ingredients.insert("Лук".to_lowercase(), Unit::Count(2i32));
@@ -309,7 +312,7 @@ fn main()
         name: "Мусака".to_string(),
         description: "Best food ever.".to_string(),
         guide: "I have no idea how to make it, but it is incredible. Only women know, and women don't tell.".to_string(),
-        image_path: "/res/img/instructionArea.png".to_string(),
+        image_path: "/res/instructionArea.png".to_string(),
         ingredients: musaka_ingredients,
     });
 
@@ -326,7 +329,7 @@ fn main()
         name: "Мусака2".to_string(),
         description: "Best food ever.".to_string(),
         guide: "I have no idea how to make it, but it is incredible. Only women know, and women don't tell.".to_string(),
-        image_path: "/res/img/instructionArea.png".to_string(),
+        image_path: "/res/instructionArea.png".to_string(),
         ingredients: musaka_ingredients,
     });
 
