@@ -99,7 +99,7 @@ $("#add").click(function(e){
         contentType: "application/json; charset=utf-8",
         failure: function(error){
             console.log(error);
-        }
+        },
         success: function(data){
             console.log(data);
         }
