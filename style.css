@@ -31,6 +31,17 @@ body {
     padding: 10px;
 }
 
+.recipeName {
+    resize: none;
+    width: 25em;
+    padding: 7px;
+    font-family: Avantgarde;
+    font-style: italic;
+    font-size: 16px;
+    color: black;
+    background: #ffcc99;
+}
+
 .area {
     resize: none;
     width: 25em;
@@ -62,6 +73,10 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 200px 200px;
+}
+
+.recipeName::placeholder {
+    color: black;
 }
 
 .area::placeholder {

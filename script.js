@@ -1,5 +1,4 @@
 var data = [];
-var newRecipe = {};
 // dobavqne na zaqvka po post sus json vutre za dobavqne na recepti
 
 String.prototype.replaceAt=function(index, replacement) {
@@ -61,6 +60,61 @@ function fillRecipeCards(objects){
     $(".results").html(cardString);
 }
 
+function fillNewRecipeArray(){
+    let unitsMap = {
+        g: "Gram",
+        gr: "Gram",
+        гр: "Gram",
+        г: "Gram",
+        kg: "Kilogram",
+        кг: "Kilogram",
+        ml: "Milliliter",
+        мл: "Milliliter",
+        l: "Liter",
+        л: "Liter",
+        tbsp: "TableSpoon",
+        t: "TableSpoon",
+        сл: "TableSpoon",
+        tsp: "TeaSpoon",
+        чл: "TeaSpoon",
+        cs: "CoffeeSpoon",
+        кл: "CoffeeSpoon",
+        бр: "Count"
+    };
+    let Name = $("#recipeName").val();
+    let Description = $("#descriptionArea").val();
+    let Ingredients = {};
+    let Guide = $("#instrucionArea").val();
+    let Image;
+    let ingredientsValue = $("#ingredientsArea").val().split(",");
+    for (i in ingredientsValue){
+        let ingredient;
+        let unit;
+        let amount;
+        let line = ingredientsValue[i].split(" ");
+        if (line.length < 3){
+            ingredient = line[0];
+            unit = unitsMap["бр"];
+            amount = line[1];
+        }
+        else {
+            ingredient = line[0];
+            unit = unitsMap[line[2]];
+            amount = line[1];
+        }            
+        ingredients[ingredient][unit] = amount;
+    }
+    let newRecipe = {
+        id: 0,
+        name: Name,
+        description: Description,
+        guide: Guide,
+        image_path: Image,
+        ingredients: Ingredients
+    };
+    return newRecipe;
+}
+
 
 $("#srchBar").on('keyup', function(e){
     let string = $(this).val();
@@ -91,6 +145,7 @@ $("#srchBar").on('keyup', function(e){
 });
 
 $("#add").click(function(e){
+    let newRecipe = fillNewRecipeArray();
     $.ajax({
         method: "POST",
         url: "api/add_recipe",
