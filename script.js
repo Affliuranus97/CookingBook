@@ -131,6 +131,8 @@ function fillNewRecipeArray(){
 
 
 $("#srchBar").on('keyup', function(e){
+    data = [];
+    fillCards(data);
     let key = event.keyCode || event.charCode;
     if (key == 8 || key == 46){
         console.log("backspace pressed!");
