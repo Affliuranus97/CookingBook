@@ -103,7 +103,7 @@ function fillNewRecipeArray(){
             amount = line[1];
         }            
         Ingredients[ingredient] = {};
-        Ingredients[ingredient][unit] = amount;
+        Ingredients[ingredient][unit] = parseInt(amount);
     }
     let newRecipe = {
         id: 0,
