@@ -16,7 +16,6 @@ use rocket_contrib::json::Json;
 use rocket_contrib::serve::{Options, StaticFiles};
 use serde::{Serialize, Deserialize};
 
-
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub enum Unit
 {
@@ -214,6 +213,7 @@ pub fn score_all_recipes<'r>(
     scored_recipes
 }
 
+/// WEB SERVER STUFF ///
 #[get("/search/<query..>")]
 pub fn api_search(recipes_sync: State<Recipes>, query: PathBuf) -> Json<Vec<Recipe>>
 {
@@ -254,8 +254,6 @@ pub fn api_search(recipes_sync: State<Recipes>, query: PathBuf) -> Json<Vec<Reci
     return Json(Vec::new());
 }
 
-
-/// WEB SERVER STUFF ///
 #[get("/all")]
 pub fn api_all_recipes(state: State<Recipes>) -> Json<Vec<Recipe>>
 {
@@ -265,13 +263,20 @@ pub fn api_all_recipes(state: State<Recipes>) -> Json<Vec<Recipe>>
 #[post("/add_recipe", format = "json", data = "<recipe>")]
 pub fn api_add_recipe(recipes_sync: State<Recipes>, recipe: Json<Recipe>) -> Json<bool>
 {
-    let real_recipe: Recipe = recipe.into_inner();
+    let mut real_recipe: Recipe = recipe.into_inner();
     let is_name_taken = recipes_sync.read().unwrap().iter()
         .find(|&r| r.name == real_recipe.name)
         .is_some();
 
     if !is_name_taken {
         let mut recipes = recipes_sync.write().unwrap();
+
+        let maybe_max_id = recipes.iter().map(|r| r.id).max();
+        real_recipe.id = maybe_max_id.unwrap_or_else(|| 0) + 1;
+        real_recipe.ingredients.iter_mut().for_each(
+            |(_name, amount)| *amount = amount.to_si()
+        );
+
         println!("[api][add_recipe] Adding new recipe {}", real_recipe);
         (*recipes).push(real_recipe);
     }
@@ -300,7 +305,6 @@ fn main()
     musaka_ingredients.insert("Олио".to_lowercase(), Unit::Gram(900f32));
     musaka_ingredients.insert("Червен пипер".to_lowercase(), Unit::TeaSpoon(1f32));
     musaka_ingredients.insert("Чубрица".to_lowercase(), Unit::TeaSpoon(1f32));
-
 
     musaka_ingredients.iter_mut().for_each(|(_name, amount)| {
         *amount = amount.to_si();
