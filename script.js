@@ -69,8 +69,9 @@ function unitConveter(unitType, amount){
 }    
     
 function createCard(object){
-	return '<div class = "card" id = "recipe_' + object["id"] + '"><div class = "image"></div>' +
-	'<div class = "title">' + object["name"] + '</div></div>';
+	return '<div class = "card" id = "recipe_' + object["id"] + '">' +
+           '<div class = "image" style = "background-image: url(' + object["image_path"] + ')"></div>' +
+           '<div class = "title">' + object["name"] + '</div></div>';
 };
 
 function createBigCards(object){
