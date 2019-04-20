@@ -91,7 +91,7 @@ $("#srchBar").on('keyup', function(e){
 });
 
 $("#add").click(function(e){
-    $ajax({
+    $.ajax({
         method: "POST",
         url: "api/add_recipe",
         data: JSON.stringify(newRecipe),
