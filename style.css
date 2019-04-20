@@ -90,6 +90,10 @@ body {
     color: black;
 }
 
+.recipeImage::placeholder {
+    color: black;
+}
+
 .area::placeholder {
     color: black;
 }
