@@ -37,6 +37,7 @@ String.prototype.replaceAt = function(index, replacement) {
 }
     
 function unitConveter(unitType, amount){
+    //Volume handle
     if (unitType == "Liter"){
         amount *= 1000;
 		if (amount <= 25 && amount%5 == 0){
@@ -52,6 +53,17 @@ function unitConveter(unitType, amount){
             return amount + " мл";
         }
         return amount/1000 + " л";
+    }  
+    //Mass handle
+    if (unitType == "Gram"){
+		if (amount >= 1000 && amount%100 == 0){
+            return amount*0.001 + " кг";
+        }
+        return amount + " гр";
+    }   
+    //Count handle
+    if (unitType == "Count"){
+        return amount + " бр";
     }
     return amount + " " + unitType;
 }    
