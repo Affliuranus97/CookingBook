@@ -91,14 +91,14 @@ function fillNewRecipeArray(){
         let ingredient;
         let unit;
         let amount;
-        let line = ingredientsValue[i].split(" ");
+        let line = ingredientsValue[i].trim().split(" ");
         if (line.length < 3){
-            ingredient = line[0].trim();
+            ingredient = line[0];
             unit = unitsMap["бр"];
             amount = line[1];
         }
         else {
-            ingredient = line[0].trim();
+            ingredient = line[0];
             unit = unitsMap[line[2]];
             amount = line[1];
         }            
