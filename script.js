@@ -92,6 +92,7 @@ function fillNewRecipeArray(){
         let unit;
         let amount;
         let line = ingredientsValue[i].split(" ");
+        line.trim();
         if (line.length < 3){
             ingredient = line[0];
             unit = unitsMap["бр"];
