@@ -135,23 +135,23 @@ $("#srchBar").on('keyup', function(e){
     data = [];
     fillCards(data);
     let string = $(this).val();
-    let i = string.indexOf(" ");
-    if (i == -1){
-        console.log("not space");
-        fillCards(data);
-        return;
+    let ingredientArray = string.split(",");
+    let resultString = "";
+    for (i in ingredientArray){
+        let singleIngredient = "";
+        let parts = ingredientArray[i].split(" ");
+        for (let k = 0; k < (parts.length - 2); k++){
+            singleIngredient += parts[k] + " ";
+        }
+        singleIngredient = singleIngredient.trim();
+        singleIngredient += "/";
+        singleIngredient += parts[parts.length - 2];
+        singleIngredient += "_";
+        singleIngredient += unitsMap[parts[parts.length - 1]];
+        resultString += singleIngredient + "/";
     }
-    string = string.replaceAt(i, "/");
-    i = string.indexOf(" ");
-    if (i == -1){
-        console.log("not space");
-        fillCards(data);
-        return;
-    }
-    string = string.replaceAt(i, "_");
-    let subString = string.substr(i + 1, string.length);
-    string = string.substr(0, i + 1) + unitsMap[subString];
-    console.log(string);
+    resultString = resultString.subString(0, resultString.length - 1);
+    console.log(resultString);
     $.ajax({
         url: "api/search/" + string,
         method: "GET",
