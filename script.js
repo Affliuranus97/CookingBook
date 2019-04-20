@@ -135,19 +135,33 @@ function fillNewRecipeArray(){
     let Image = $("#recipeImage").val();
     let ingredientsValue = $("#ingredientsArea").val().split(",");
     for (i in ingredientsValue){
-        let ingredient;
-        let unit;
-        let amount;
+        let ingredient = "";
+        let unit = "";
+        let amount = 0;
         let line = ingredientsValue[i].trim().split(" ");
-        if (line.length < 3){
-            ingredient = line[0];
+        /*
+        for (let k = 0; k < (parts.length - 2); k++){
+            singleIngredient += parts[k] + " ";
+        }
+        singleIngredient = singleIngredient.trim();
+        singleIngredient += parts[parts.length - 2];
+        singleIngredient += unitsMap[parts[parts.length - 1]];
+        */
+        if (!isNan(line[line.length - 1])){
+            for (let j = 0; j < line.length - 2; j++){
+                ingredient += line[j] + " ";
+            }
+            ingredient.trim();
             unit = unitsMap["бр"];
-            amount = line[1];
+            amount = line[line.length - 1];
         }
         else {
-            ingredient = line[0];
-            unit = unitsMap[line[2]];
-            amount = line[1];
+            for (let j = 0; j < line.length - 3; j++){
+                ingredient += line[j] + " ";
+            }
+            ingredient.trim();
+            unit = unitsMap[line[line.length - 1]];
+            amount = line[line.length - 2];
         }            
         Ingredients[ingredient] = {};
         Ingredients[ingredient][unit] = parseInt(amount);
