@@ -48,7 +48,7 @@ function createBigCards(object){
         for (let k of Object.entries(i[1])){
 			ingredients += i[0] + " " + k[1] + " " + reverseUnits[k[0]] + ", ";
         }
-        ingredients = ingredients.substr(0, i - 2);
+        ingredients = ingredients.substr(0, ingredients.length - 3);
     }
     return '<div class = "image"></div>' +
            '<div class = "title">' + object["name"] + '</div>' + 
