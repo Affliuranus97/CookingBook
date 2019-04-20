@@ -42,6 +42,17 @@ body {
     background: #ffcc99;
 }
 
+.recipeImage {
+    resize: none;
+    width: 25em;
+    padding: 7px;
+    font-family: Avantgarde;
+    font-style: italic;
+    font-size: 16px;
+    color: black;
+    background: #ffcc99;
+}
+
 .area {
     resize: none;
     width: 25em;

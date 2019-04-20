@@ -98,7 +98,7 @@ function fillNewRecipeArray(){
     let Description = $("#descriptionArea").val();
     let Ingredients = {};
     let Guide = $("#instructionArea").val();
-    let Image = "";
+    let Image = $("#recipeImage").val();
     let ingredientsValue = $("#ingredientsArea").val().split(",");
     for (i in ingredientsValue){
         let ingredient;
@@ -133,10 +133,6 @@ function fillNewRecipeArray(){
 $("#srchBar").on('keyup', function(e){
     data = [];
     fillCards(data);
-    let key = event.keyCode || event.charCode;
-    if (key == 8 || key == 46){
-        console.log("backspace pressed!");
-    }
     let string = $(this).val();
     let i = string.indexOf(" ");
     if (i == -1){
