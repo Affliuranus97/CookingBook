@@ -102,7 +102,7 @@ function fillNewRecipeArray(){
             unit = unitsMap[line[2]];
             amount = line[1];
         }            
-        ingredients[ingredient][unit] = amount;
+        Ingredients[ingredient][unit] = amount;
     }
     let newRecipe = {
         id: 0,
