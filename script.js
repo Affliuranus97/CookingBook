@@ -70,7 +70,7 @@ function fillCards(objects){
         for(let i = 0; i < objects.length; i++){
             let idString = objects[i]["id"];
             if (idString == id){
-                bigCardString = createBigCards(objects[id]);
+                bigCardString = createBigCards(objects[i]);
                 $(".recipeObject").html(bigCardString);
                 break;
             }
