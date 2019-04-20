@@ -268,12 +268,11 @@ pub fn api_add_recipe(recipes_sync: State<Recipes>, recipe: Json<Recipe>) -> Jso
         .find(|&r| r.name == real_recipe.name)
         .is_some();
 
-    if is_name_taken {
+    if !is_name_taken {
         let mut recipes = recipes_sync.write().unwrap();
         println!("[api][add_recipe] Adding new recipe {}", real_recipe);
         (*recipes).push(real_recipe);
     }
-
 
     return Json(!is_name_taken);
 }
