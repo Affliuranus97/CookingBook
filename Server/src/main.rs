@@ -4,7 +4,7 @@
 extern crate rocket;
 extern crate rocket_contrib;
 
-use std::path::PathBuf;
+use std::path::{PathBuf, Path};
 use std::iter::*;
 use std::sync::RwLock;
 use std::hash::Hash;
@@ -183,10 +183,14 @@ pub fn parse_parameters(query: PathBuf) -> HashMap<String, f32>
         .map(|x| x.to_string_lossy().to_string().to_lowercase())
         .collect::<Vec<String>>();
 
+    println!("[DEBUG] Searching for [1] {:?}", search_params);
+
     let search_string_map: HashMap<String, String> = zip_to_map(
         search_params.iter().step_by(2),
         search_params.iter().skip(1).step_by(2),
     );
+
+    println!("[DEBUG] Searching for [2] {:?}", search_string_map);
 
     return search_string_map
         .into_iter()
@@ -213,6 +217,25 @@ pub fn score_all_recipes<'r>(
     scored_recipes
 }
 
+pub fn save_recipes(recipes: &Vec<Recipe>) {
+    let result_json = serde_json::to_string(recipes);
+
+    if result_json.is_ok() {
+        let res = std::fs::write(
+            Path::new("persistence.json"),
+            result_json.unwrap(),
+        );
+
+        if res.is_ok() {
+            println!("[INFO ] Saved recipes!");
+        } else {
+            println!("[ERROR] Failed when trying to save recipes.");
+        }
+    } else {
+        println!("[ERROR] Failed serializing the recipes.")
+    }
+}
+
 /// WEB SERVER STUFF ///
 #[get("/search/<query..>")]
 pub fn api_search(recipes_sync: State<Recipes>, query: PathBuf) -> Json<Vec<Recipe>>
@@ -224,9 +247,11 @@ pub fn api_search(recipes_sync: State<Recipes>, query: PathBuf) -> Json<Vec<Reci
         return Json(Vec::new());
     }
 
+    println!("[DEBUG] query {:?}", query);
     let search_map: HashMap<String, f32> = parse_parameters(query);
+    println!("[DEBUG] Search map [Final] {:?}", search_map);
 
-    if has_invalid_amounts(&search_map) {
+    if has_invalid_amounts(&search_map) || search_map.is_empty() {
         return Json(Vec::new());
     }
     let scored_recipes: Vec<(f32, &Recipe)>
@@ -241,10 +266,10 @@ pub fn api_search(recipes_sync: State<Recipes>, query: PathBuf) -> Json<Vec<Reci
 
         let can_make_any_recipe = !can_make_now.is_empty();
         let recipe_iterator = if can_make_any_recipe {
-            println!("Can make some recipes");
+            println!("[ INFO] Can make some recipes");
             can_make_now.into_iter()
         } else {
-            println!("Couldn't make any recipes");
+            println!("[ INFO] Can't make any recipes");
             scored_recipes.into_iter()
         };
 
@@ -277,8 +302,10 @@ pub fn api_add_recipe(recipes_sync: State<Recipes>, recipe: Json<Recipe>) -> Jso
             |(_name, amount)| *amount = amount.to_si()
         );
 
-        println!("[api][add_recipe] Adding new recipe {}", real_recipe);
+        println!("[ INFO][api][add_recipe] Adding new recipe {}", real_recipe);
         (*recipes).push(real_recipe);
+
+        save_recipes(&recipes);
     }
 
     return Json(!is_name_taken);
@@ -292,50 +319,20 @@ fn main()
         .port(80)
         .unwrap();
 
-    let mut musaka_ingredients: HashMap<String, Unit> = HashMap::new();
-    musaka_ingredients.insert("Вода".to_lowercase(), Unit::Milliliter(800f32));
-    musaka_ingredients.insert("Кайма".to_lowercase(), Unit::Gram(500f32));
-    musaka_ingredients.insert("Картофи".to_lowercase(), Unit::Kilogram(1f32));
-    musaka_ingredients.insert("Лук".to_lowercase(), Unit::Count(2i32));
-    musaka_ingredients.insert("Домати".to_lowercase(), Unit::Count(2i32));
-    musaka_ingredients.insert("Кисело мляко".to_lowercase(), Unit::Gram(400f32));
-    musaka_ingredients.insert("Яйца".to_lowercase(), Unit::Gram(900f32));
-    musaka_ingredients.insert("Кашкавал".to_lowercase(), Unit::Gram(900f32));
-    musaka_ingredients.insert("Брашно".to_lowercase(), Unit::Gram(900f32));
-    musaka_ingredients.insert("Олио".to_lowercase(), Unit::Gram(900f32));
-    musaka_ingredients.insert("Червен пипер".to_lowercase(), Unit::TeaSpoon(1f32));
-    musaka_ingredients.insert("Чубрица".to_lowercase(), Unit::TeaSpoon(1f32));
-
-    musaka_ingredients.iter_mut().for_each(|(_name, amount)| {
-        *amount = amount.to_si();
-    });
-
     let mut recipes: Vec<Recipe> = Vec::new();
-    recipes.push(Recipe {
-        id: 0,
-        name: "Мусака".to_string(),
-        description: "Best food ever.".to_string(),
-        guide: "I have no idea how to make it, but it is incredible. Only women know, and women don't tell.".to_string(),
-        image_path: "/res/instructionArea.png".to_string(),
-        ingredients: musaka_ingredients,
-    });
 
-    let mut musaka_ingredients: HashMap<String, Unit> = HashMap::new();
-    musaka_ingredients.insert("чушки".to_lowercase(), Unit::Count(4));
+    let maybe_saved_recipes_str
+        = std::fs::read_to_string(Path::new("persistence.json"));
 
-    musaka_ingredients
-        .iter_mut()
-        .for_each(|(_ingredient, amount)| {
-            *amount = amount.to_si();
-        });
-    recipes.push(Recipe {
-        id: 1,
-        name: "Мусака2".to_string(),
-        description: "Best food ever.".to_string(),
-        guide: "I have no idea how to make it, but it is incredible. Only women know, and women don't tell.".to_string(),
-        image_path: "/res/instructionArea.png".to_string(),
-        ingredients: musaka_ingredients,
-    });
+    if maybe_saved_recipes_str.is_ok() {
+        let maybe_saved_recipes: Result<Vec<Recipe>, _> =
+            serde_json::from_str(maybe_saved_recipes_str.unwrap().as_str());
+
+        if maybe_saved_recipes.is_ok() {
+            recipes = maybe_saved_recipes.unwrap();
+            println!("[ INFO] Loaded {} recipes", recipes.len());
+        }
+    }
 
 
     let rocket = rocket::custom(cfg)
