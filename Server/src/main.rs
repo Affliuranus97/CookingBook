@@ -344,22 +344,3 @@ fn main()
 
     rocket.launch();
 }
-
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use std::thread;
-    use std::thread::JoinHandle;
-
-    fn start_web_server() -> JoinHandle<()> {
-        thread::spawn(main)
-    }
-
-    #[test]
-    fn test_web_server() {
-        let server = start_web_server();
-
-//        use rocket_contrib::helmet::
-    }
-}
