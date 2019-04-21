@@ -9,4 +9,4 @@ if __name__ == '__main__':
         os.system("git pull")
         os.system("git log --pretty --oneline -n5>git_latest.txt")
 
-        time.sleep(15 + random.randint(3, 10))
+        time.sleep(random.randint(5, 10))
