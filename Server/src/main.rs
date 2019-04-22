@@ -333,7 +333,7 @@ fn main()
         if arg.starts_with("--port=") {
             port = arg[7..].to_string().parse::<u16>().unwrap();
         } else if arg.starts_with("--webroot=") {
-            webroot = arg[9..].to_string();
+            webroot = arg[10..].to_string();
         }
     }
 
