@@ -180,7 +180,7 @@ pub fn parse_parameters(query: PathBuf) -> HashMap<String, f32>
     // PathBuf provides OsStr objects, that are clunky. Convert
     // to normal Strings.
     let search_params = query.iter()
-        .map(|x| x.to_string_lossy().to_string().to_lowercase())
+        .map(|x| x.to_string_lossy().to_string().trim().to_lowercase())
         .collect::<Vec<String>>();
 
     println!("[DEBUG] Searching for [1] {:?}", search_params);
@@ -289,6 +289,7 @@ pub fn api_all_recipes(state: State<Recipes>) -> Json<Vec<Recipe>>
 pub fn api_add_recipe(recipes_sync: State<Recipes>, recipe: Json<Recipe>) -> Json<bool>
 {
     let mut real_recipe: Recipe = recipe.into_inner();
+    real_recipe.name = real_recipe.name.trim().to_string();
     let is_name_taken = recipes_sync.read().unwrap().iter()
         .find(|&r| r.name == real_recipe.name)
         .is_some();
@@ -299,8 +300,17 @@ pub fn api_add_recipe(recipes_sync: State<Recipes>, recipe: Json<Recipe>) -> Jso
         let maybe_max_id = recipes.iter().map(|r| r.id).max();
         real_recipe.id = maybe_max_id.unwrap_or_else(|| 0) + 1;
         real_recipe.ingredients.iter_mut().for_each(
-            |(_name, amount)| *amount = amount.to_si()
+            |(_name, amount)| {
+                *amount = amount.to_si()
+            }
         );
+
+        let mut ingredients_trimmed: HashMap<String, Unit> = HashMap::new();
+        for (name, amount) in real_recipe.ingredients {
+            ingredients_trimmed.insert(name.trim().to_string(), amount);
+        }
+
+        real_recipe.ingredients = ingredients_trimmed;
 
         println!("[ INFO][api][add_recipe] Adding new recipe {}", real_recipe);
         (*recipes).push(real_recipe);
