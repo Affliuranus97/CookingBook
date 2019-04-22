@@ -8,7 +8,12 @@ html {
 }
 
 body {
-    background: linear-gradient(#ffcc99 0%, #ffbf80 20%, #ffb366 40%, #ffa64d 60%, #ff9933 80%, #ff8c1a 100%) fixed;
+    /*background: linear-gradient(#ffcc99 0%, #ffbf80 20%, #ffb366 40%, #ffa64d 60%, #ff9933 80%, #ff8c1a 100%) fixed;*/
+    background-image: url("res/Spices_Cinnamon_505758.jpg");
+    background-position: center top; 
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
 }
 
 /* Logo Image */
@@ -29,28 +34,8 @@ body {
     font-style: italic;
     font-size: 25px;
     padding: 10px;
-}
-
-.recipeName {
-    resize: none;
-    width: 25em;
-    padding: 7px;
-    font-family: Avantgarde;
-    font-style: italic;
-    font-size: 16px;
-    color: black;
-    background: #ffcc99;
-}
-
-.recipeImage {
-    resize: none;
-    width: 25em;
-    padding: 7px;
-    font-family: Avantgarde;
-    font-style: italic;
-    font-size: 16px;
-    color: black;
-    background: #ffcc99;
+	color:white;
+	
 }
 
 .area {
@@ -86,14 +71,6 @@ body {
     background-size: 200px 200px;
 }
 
-.recipeName::placeholder {
-    color: black;
-}
-
-.recipeImage::placeholder {
-    color: black;
-}
-
 .area::placeholder {
     color: black;
 }
@@ -102,7 +79,7 @@ body {
     display: inline-block;
     justify-content: center;
     margin: 10px 10px;
-    color: #211e1d;
+    color: white;
     text-transform: uppercase;
     background: transparent;
     border: 4px solid #211e1d;
@@ -116,7 +93,6 @@ body {
     background: #dd5a08;
     border-color: #dd5a08;
     transition: all 0.4s ease 0s;
-    cursor: pointer;
 }
 
 /* Search Area */
@@ -129,6 +105,7 @@ body {
     font-style: italic;
     font-size: 25px;
     padding: 10px;
+	color:white;
 }
 
 .bar {
@@ -178,6 +155,7 @@ body {
 .credits {
     display: flex;
     justify-content: space-between;
+	color:white;
 }
 
 .credits .tulogo {
@@ -197,7 +175,7 @@ body {
     font-size: 16px;
     font-weight: 600;
     font-style: italic;
-    color: #222;
+    color: white;
     text-shadow: 0 0 3px #555;
 }
 
@@ -211,7 +189,7 @@ body {
     font-size: 18px;
     font-weight: 600;
     font-style: italic;
-    color: #222;
+    color: white;
     text-shadow: 0 0 3px #555;
     text-decoration: none;
 }
@@ -318,8 +296,7 @@ body {
     padding: 5px 5px 5px 5px;
     height: 180px;
     border-radius: 12px 12px 0 0;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-image: url("http://www.gotvetesmen.com/gallery/albums/userpics/10005/Tatarsko_kyufte.jpg");
 }
 
 .results .card .title {
@@ -341,7 +318,8 @@ body {
 	width: 100%;
 	top: 0;
 	left: 0;
-	background: rgba(17, 17, 17, 0.8);
+	//background: rgba(17, 17, 17, 0.8);
+	background-image: url("BG_Platters.jpg");
 }
 
 .visible{
@@ -367,6 +345,7 @@ body {
     padding: 5px 5px 5px 5px;
     height: 180px;
     border-radius: 12px 12px 0 0;
+    background-image: url("http://www.gotvetesmen.com/gallery/albums/userpics/10005/Tatarsko_kyufte.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -376,7 +355,6 @@ body {
     padding-top: 2px;
     padding-left: 5px;
     padding-right: 5px;
-    padding-bottom: 5px;
     text-align: center;
     height: 60px;
     font: 14pt Arial;
@@ -388,7 +366,6 @@ body {
     padding-top: 2px;
     padding-left: 5px;
     padding-right: 5px;
-    padding-bottom: 5px;
     text-align: center;
     height: 60px;
     font: 14pt Arial;
@@ -400,7 +377,6 @@ body {
     padding-top: 2px;
     padding-left: 5px;
     padding-right: 5px;
-    padding-bottom: 5px;
     text-align: center;
     height: 60px;
     font: 14pt Arial;
@@ -412,7 +388,6 @@ body {
     padding-top: 2px;
     padding-left: 5px;
     padding-right: 5px;
-    padding-bottom: 5px;    
     text-align: center;
     height: 60px;
     font: 14pt Arial;
