@@ -307,7 +307,7 @@ pub fn api_add_recipe(recipes_sync: State<Recipes>, recipe: Json<Recipe>) -> Jso
 
         let mut ingredients_trimmed: HashMap<String, Unit> = HashMap::new();
         for (name, amount) in real_recipe.ingredients {
-            ingredients_trimmed.insert(name.trim().to_string(), amount);
+            ingredients_trimmed.insert(name.trim().to_string().to_lowercase(), amount);
         }
 
         real_recipe.ingredients = ingredients_trimmed;
