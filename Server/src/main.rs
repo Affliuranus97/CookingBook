@@ -5,6 +5,7 @@ extern crate rocket;
 extern crate rocket_contrib;
 
 use std::path::{PathBuf, Path};
+use std::env::args;
 use std::iter::*;
 use std::sync::RwLock;
 use std::hash::Hash;
@@ -180,7 +181,7 @@ pub fn parse_parameters(query: PathBuf) -> HashMap<String, f32>
     // PathBuf provides OsStr objects, that are clunky. Convert
     // to normal Strings.
     let search_params = query.iter()
-        .map(|x| x.to_string_lossy().to_string().trim().to_lowercase())
+        .map(|x| x.to_string_lossy().trim().to_lowercase())
         .collect::<Vec<String>>();
 
     println!("[DEBUG] Searching for [1] {:?}", search_params);
@@ -307,10 +308,11 @@ pub fn api_add_recipe(recipes_sync: State<Recipes>, recipe: Json<Recipe>) -> Jso
 
         let mut ingredients_trimmed: HashMap<String, Unit> = HashMap::new();
         for (name, amount) in real_recipe.ingredients {
-            ingredients_trimmed.insert(name.trim().to_string().to_lowercase(), amount);
+            ingredients_trimmed.insert(name.trim().to_lowercase(), amount);
         }
 
         real_recipe.ingredients = ingredients_trimmed;
+
 
         println!("[ INFO][api][add_recipe] Adding new recipe {}", real_recipe);
         (*recipes).push(real_recipe);
@@ -324,9 +326,20 @@ pub fn api_add_recipe(recipes_sync: State<Recipes>, recipe: Json<Recipe>) -> Jso
 #[allow(dead_code)]
 fn main()
 {
+    let mut port = 80u16;
+    let mut webroot = r"C:\Stuff\Projects\CookingBook_Web".to_string();
+
+    for arg in args() {
+        if arg.starts_with("--port=") {
+            port = arg[7..].to_string().parse::<u16>().unwrap();
+        } else if arg.starts_with("--webroot=") {
+            webroot = arg[10..].to_string();
+        }
+    }
+
     let cfg = Config::build(Environment::Development)
         .address("0.0.0.0")
-        .port(80)
+        .port(port)
         .unwrap();
 
     let mut recipes: Vec<Recipe> = Vec::new();
@@ -344,10 +357,10 @@ fn main()
         }
     }
 
-
+    println!("{}", webroot);
     let rocket = rocket::custom(cfg)
         .manage(RwLock::new(recipes))
-        .mount("/", StaticFiles::new(r"C:\Stuff\Projects\CookingBook_Web", Options::Index))
+        .mount("/", StaticFiles::new(webroot, Options::Index))
         .mount("/api/", routes![api_search])
         .mount("/api/", routes![api_add_recipe])
         ;

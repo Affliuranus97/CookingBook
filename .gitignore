@@ -3,4 +3,4 @@ out
 git_latest.txt
 .idea
 CookingBook.iml
-Server/persistence.json
+**/persistence.json
