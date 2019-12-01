@@ -1,41 +1,120 @@
+@font-face{
+	font-family: "Avantgarde";
+	src: url("res/AVANTN.ttf");
+}
+
+body {
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+
+    background-image: url("https://judiweidler.com/assets/designs/131/images/theme_bg.jpg");
+    background-repeat: no-repeat;
+    background-size: calc(100vw);
+}
+
 #main {
     min-width: 100px;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0;
     display: flex;
     align-content: center;
     flex-flow: column;
+    min-height: 100vh;
 
-    height: 100vh;
+    font-family: "Avantgarde", sans-serif;
 }
+
+#background{
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.90) 1%, rgba(255,255,255,0.90) 99%, rgba(255,255,255,0) 100%);
+    min-width: 100px;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+
 
 header {
     display: flex;
 }
 
-header img{
+header img {
     margin: 0 auto;
 }
 
-nav {
+#main > nav {
     display: flex;
     align-items: stretch;
+    justify-content: center;
 
 }
 
-nav button {
+a, a:hover, a:visited, a:active {
+    color: black;
+    text-decoration: none;
+}
+
+#main > nav a {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    flex-direction: column;
+    background: rgba(180, 180, 180, 0.5);
     font-size: 50px;
     min-height: 150px;
+    text-align: center;
+}
+
+#main > nav a:first-child{
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+#main > nav a:last-child{
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+#main > nav a:hover {
+    background: #E7E7E7;
+}
+
+#spacer {
     flex-grow: 1;
+    min-height: 120px;
 }
 
 footer {
+    border-top: 1px solid #bbb;
+    /*border-top-left-radius: 250px;*/
+    /*border-top-right-radius: 250px;*/
+    color: #333;
+
     display: flex;
-    justify-self: stretch;
+    padding-bottom: 8px;
+    flex-direction: column;
+    align-items: center;
 }
 
-footer ul {
+footer nav a {
+    color: #333;
+}
 
-    flex-direction: column;
-    align-self: flex-end;
+footer nav {
+    display: flex;
+    flex-direction: row;
+}
+
+footer nav ul {
+    min-width: 150px;
+
+    list-style-type: none;
+    padding-left: 0;
+}
+
+
+footer span {
+    align-self: center;
 }
