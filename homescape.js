@@ -6,6 +6,12 @@ $(".searchList").click(function(){
     else{
         $("#hiddenPrice").addClass("hidden");
     }
+    if($("#locationButton").find(".arrow").hasClass("rotateImage")){
+        $("#hiddenLocation").removeClass("hidden");
+    }
+    else{
+        $("#hiddenLocation").addClass("hidden");
+    }
     if($("#sizeButton").find(".arrow").hasClass("rotateImage")){
         $("#hiddenSize").removeClass("hidden");
     }
@@ -97,11 +103,28 @@ yearSlider.oninput = function(){
 
 
 function CityFilter() {
-    return undefined;
+    if(!$("#filter1").prop("checked")) {
+        return undefined;
+    }
+    let city = $("#loc_city").val();
+
+    if (city.length > 0)
+        return city;
+    else
+        return undefined;
 }
 
 function DistrictFilter() {
-    return undefined;
+    if(!$("#filter1").prop("checked")) {
+        return undefined;
+    }
+
+    let distr = $("#loc_district").val();
+
+    if (distr.length > 0)
+        return distr;
+    else
+        return undefined;
 }
 
 function KindFilter() {
@@ -150,9 +173,9 @@ function SizeFilter() {
 
 
 function RunFilters() {
-    let maxPrice = PriceFilter();
     let city = CityFilter();
     let district = DistrictFilter();
+    let maxPrice = PriceFilter();
     let minRooms = undefined;
     let minSize = SizeFilter();
     let minYear = YearFilter();

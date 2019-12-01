@@ -16,10 +16,20 @@
                 <div class = "tempTab"></div>
                 <div class = "searchOptions">
                     <ul>
-                        <li class = "searchList"><span>Location<img class = "arrow" src = "res/arrowDown.png">
+                        <li class = "searchList" id="locationButton"><span>Location<img class = "arrow" src = "res/arrowDown.png">
                             <input type="checkbox" id="filter1" value="Location" checked>
                             </span>
                         </li>
+                        <div id="hiddenLocation" class="hidden">
+                            <p>
+                                <label for="loc_city">City:</label>
+                                <input type="text" id="loc_city">
+                            </p>
+                            <p>
+                                <label for="loc_city">District:</label>
+                                <input type="text" id="loc_district">
+                            </p>
+                        </div>
                         <li class = "searchList" id = "kindButton"><span>Kind<img class = "arrow" src = "res/arrowDown.png">
                             <input type="checkbox" id="filter2" value="Kind">
                             </span>
