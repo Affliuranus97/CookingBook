@@ -6,13 +6,13 @@ edition = "2018"
 
 [dependencies]
 rayon = "1.0.3"
-rocket = "0.4.0"
+rocket = "0.4.2"
 json = "0.11.13"
 serde = { version = "1.0.90", features = ["derive"] }
 serde_json = "1.0.39"
 
 [dependencies.rocket_contrib]
-version = "0.4.0"
+version = "0.4.2"
 default-features = false
 features = ["serve", "json"]
 
