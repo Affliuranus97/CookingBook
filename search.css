@@ -422,3 +422,47 @@ li.searchList:hover span {
   display: block;
   cursor: pointer;
 }
+
+
+
+/* Search results */
+.searchResults {
+    display: flex;
+    margin-left: 120px;
+    flex-wrap: wrap;
+    flex-shrink: 1;
+}
+
+.re-property {
+    display: flex;
+    flex-direction: column;
+    max-width: 240px;
+    flex-shrink: 1;
+
+    background: white;
+    margin: 5px;
+    padding: 5px;
+}
+
+.re-property div {
+    display: flex;
+    flex-shrink: 1;
+}
+
+.re-image {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.re-text {
+    font-size: 18px;
+}
+
+.re-title {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.re-label {
+    flex-grow: 1;
+}
