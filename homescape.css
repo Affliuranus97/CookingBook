@@ -3,11 +3,15 @@
 	src: url("res/AVANTN.ttf");
 }
 
+html {
+    margin-left: calc(100vw - 100%);
+}
+
 body {
     overflow: auto;
     margin: 0;
     padding: 0;
-
+    background: fixed;
     background-image: url("https://judiweidler.com/assets/designs/131/images/theme_bg.jpg");
     background-repeat: no-repeat;
     background-size: calc(100vw);
@@ -50,6 +54,11 @@ a, a:hover, a:visited, a:active {
 #spacer {
     flex-grow: 1;
     min-height: 120px;
+}
+
+#spacerAbout {
+    flex-grow: 1;
+    min-height: 40px;
 }
 
 footer {

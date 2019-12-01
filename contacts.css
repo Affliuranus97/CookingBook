@@ -1,6 +1,8 @@
 .credits {
     display: flex;
     justify-content: space-between;
+    flex-flow: column;
+    align-content: center;
 }
 
 .credits .creditsText {
@@ -8,9 +10,18 @@
     font-size: 16px;
     font-weight: 600;
     font-style: italic;
-    color: white;
-    text-shadow: 0 0 3px #555;
-	text-shadow: 2px 2px 4px #000000;
+    color: #010863;
+	text-shadow: 2px 2px 4px #4d2222;
+}
+
+.credits .aboutUs{
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: italic;
+    color: #010863;
+	text-shadow: 2px 2px 4px #4d2222;
+    text-align: center;
 }
 
 .credits .creditsText .mail a:hover{
