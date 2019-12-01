@@ -1,6 +1,42 @@
 /* JS shit */
-.rotate-image {
+.rotateImage {
     transform: rotate(180deg);
+}
+
+@font-face {
+	font-family: "Avantgarde";
+	src: url("res/AVANTN.ttf");
+}
+
+body {
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+
+    background-image: url("https://judiweidler.com/assets/designs/131/images/theme_bg.jpg");
+    background-repeat: no-repeat;
+    background-size: calc(100vw);
+}
+
+#background {
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.90) 1%, rgba(255,255,255,0.90) 99%, rgba(255,255,255,0) 100%);
+    min-width: 100px;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#main {
+    min-width: 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    align-content: center;
+    flex-flow: column;
+    min-height: 100vh;
+
+    font-family: "Avantgarde", sans-serif; 
 }
 
 .searchHeader {
@@ -50,8 +86,8 @@ ul {
 }
 
 li.searchList {
-    font-size: 25px;
-    width: 8em;
+    font-size: 20px;
+    width: 15em;
     height: 2em;
     color: #1fe066;
     border-left: 0.08em solid;
@@ -102,4 +138,113 @@ li.searchList span {
 
 li.searchList:hover span {
     transform: translateX(0.15em);
+}
+
+.priceLabel{
+  margin-top: 30px;
+  width: 308px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  color: #000;
+  span:first-child{
+    margin-left: 10px;
+  }
+}
+
+.hidden {
+    visibility: hidden;
+    display: none;
+}
+
+.slider {
+  margin-top: 29px;
+  width: 300px;
+  -webkit-appearance: none;
+}
+
+.slider:focus {
+    outline: none;
+}
+
+.slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 1px;
+    cursor: pointer;
+    box-shadow: none;
+    background: #000;
+    border-radius: 0px;
+    border: 0px solid #000;
+}
+
+.slider::-moz-range-track {
+    width: 100%;
+    height: 1px;
+    cursor: pointer;
+    box-shadow: none;
+    background: #000;
+    border-radius: 0px;
+    border: 0px solid #000;
+}
+
+.slider::-webkit-slider-thumb {
+    box-shadow: none;
+    border: 0px solid #000;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+    height: 42px;
+    width: 22px;
+    border-radius: 22px;
+    background: rgba(0, 0, 0, 1);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -20px;
+}
+
+.slider::-moz-range-thumb{
+    box-shadow: none;
+    border: 0px solid #000;
+    box-shadow: 0px 10px 10px rgba(0, 0 ,0, 0.25);
+    height: 42px;
+    width: 22px;
+    border-radius: 22px;
+    background: rgba(0, 0, 0, 1);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -20px;
+}
+  
+.sluder::-moz-focus-outer {
+    border: 0;
+}  
+
+.priceValue {
+    position: relative;
+    transform-origin: center center;
+    display: block;
+    width: 98px;
+    height: 98px;
+    background: transparent;
+    border-radius: 50%;
+    line-height: 30px;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 22px;
+    box-sizing: border-box;
+    border: 2px solid #000;
+    margin-top: 20px;
+    margin-left: -38px;
+    left: attr(value);
+    color: #000;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 25px;
+}
+
+.priceValue::after {
+    content: "лева";
+    display: block;
+    font-size: 15px;
+    letter-spacing: 0.07em;
+    margin-top: -2px;
 }

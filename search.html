@@ -6,22 +6,31 @@
     <link rel="stylesheet" type = "text/css" href="search.css">
 </head>
 <body>
-    <div class = "searchHeader">
-        <header><img src="res/logo.png" alt=""></header>
-    </div>
-    <div class = "content">
-        <div class = "tempTab"></div>
-        <div class = "searchOptions">
-            <ul> 
-            <!--<div class = "searchOptions">-->
-                <li class = "searchList"><span>Location<img class = "arrow" src = "res/arrowDown.png"></span></li>
-                <li class = "searchList"><span>Price<img class = "arrow" src = "res/arrowDown.png"></span></li>
-                <li class = "searchList"><span>Size<img class = "arrow" src = "res/arrowDown.png"></span></li>
-                <li class = "searchList"><span>Type<img class = "arrow" src = "res/arrowDown.png"></span></li>
-                <li class = "searchList"><span>Construction<img class = "arrow" src = "res/arrowDown.png"></span></li>
-            </ul>
-         </div>
-        <div class = "searchResults">
+    <div id = "background">
+        <div id = "main">
+            <div class = "searchHeader">
+                <header><img src="res/logo.png" alt=""></header>
+            </div>
+            <div class = "content">
+                <div class = "tempTab"></div>
+                <div class = "searchOptions">
+                    <ul> 
+                    <!--<div class = "searchOptions">-->
+                        <li class = "searchList"><span>Location<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <li class = "searchList" id = "priceButton"><span>Price<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <div id = "hidden" class = "hidden">
+                            <span class = "priceValue" id = "priceValue">0</span>
+                            <input id = "slideBar" class = "slider" type = "range" min = "1" max = "100" value = "0">
+                            <div class = "priceLabel"><span>1</span><span>100</span></div>
+                        </div>
+                        <li class = "searchList"><span>Size<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <li class = "searchList"><span>Type<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <li class = "searchList"><span>Construction<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                    </ul>
+                 </div>
+                <div class = "searchResults">
+                </div>
+            </div>
         </div>
     </div>
     <script src = "jQuery.js"></script>
