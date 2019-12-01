@@ -1,0 +1,41 @@
+#main {
+    min-width: 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-content: center;
+    flex-flow: column;
+
+    height: 100vh;
+}
+
+header {
+    display: flex;
+}
+
+header img{
+    margin: 0 auto;
+}
+
+nav {
+    display: flex;
+    align-items: stretch;
+
+}
+
+nav button {
+    font-size: 50px;
+    min-height: 150px;
+    flex-grow: 1;
+}
+
+footer {
+    display: flex;
+    justify-self: stretch;
+}
+
+footer ul {
+
+    flex-direction: column;
+    align-self: flex-end;
+}
