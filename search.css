@@ -68,7 +68,7 @@ header img{
 
 .searchOptions {
     display: flex;
-    width: 15%;
+    width: 20%;
     align-content: center;
     flex-flow: column;    
 }
@@ -141,6 +141,42 @@ li.searchList:hover span {
 }
 
 .priceLabel{
+  margin-top: 30px;
+  width: 308px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  color: #000;
+  span:first-child{
+    margin-left: 10px;
+  }
+}
+
+.sizeLabel{
+  margin-top: 30px;
+  width: 308px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  color: #000;
+  span:first-child{
+    margin-left: 10px;
+  }
+}
+
+.yearLabel{
+  margin-top: 30px;
+  width: 308px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  color: #000;
+  span:first-child{
+    margin-left: 10px;
+  }
+}
+
+.floorLabel{
   margin-top: 30px;
   width: 308px;
   display: flex;
