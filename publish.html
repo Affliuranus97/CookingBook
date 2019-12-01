@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HomeScape - Publish</title>
+    <link rel="stylesheet" href="homescape.css">
+    <link rel="stylesheet" href="publish.css">
+</head>
+<body>
+    <div id="background">
+        <div id="main">
+            <header><img src="res/logo.png" alt=""></header>
+            <section>
+                <form>
+                    <div>
+                        <span class="label">Kind</span>
+                        <select id="kind" name="kind" class="form-input">
+                            <option>Sale</option>
+                            <option>Rent</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span class="label">Location (City)</span>
+                        <input type="text" id="city" name="city" class="form-input">
+                    </div>
+                    <div>
+                        <span class="label">Location (District)</span>
+                        <input type="text" id="district" name="district" class="form-input">
+                    </div>
+                    <div>
+                        <span class="label">Type</span>
+                        <select id="type" name="type" class="form-input">
+                            <option>House</option>
+                            <option>Apartment</option>
+                            <option>House Floor</option>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div>
+                        <span class="label">Construction</span>
+                        <select id="construction" name="construction" class="form-input">
+                            <option>Bricks</option>
+                            <option>Concrete Panels</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span class="label">Year</span>
+                        <input type="number" min="1900" max="2019" step="1" value="2000" id="year" name="year" class="form-input">
+                    </div>
+                    <div>
+                        <span class="label">Rooms</span>
+                        <input type="number" value="2" id="rooms" name="rooms" class="form-input">
+                    </div>
+                    <div>
+                        <span class="label">Floor</span>
+                        <div class="floors-aligner">
+                            <input type="number" value="1" id="floor" name="price" class="form-input">
+                            <span class="floors-sep">/</span>
+                            <input type="number" value="1" id="floors" name="floors" class="form-input">
+                        </div>
+                    </div>
+                    <div>
+                        <span class="label">Price</span>
+                        <input type="number" value="0" id="price" name="price" class="form-input">
+                        <select id="currency" name="currency" class="form-input">
+                            <option>BGN</option>
+                            <option>EUR</option>
+                            <option>USD</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span class="label">Size</span>
+                        <input type="number" value="10" min="5" max="1000" id="size" name="size" class="form-input">
+                        <span class="square-meters">sq. meters</span>
+                    </div>
+                    <div>
+                        <span class="label">Phone</span>
+                        <input type="text" id="phone" name="phone" value="+359" class="form-input">
+                    </div>
+                    <div>
+                        <span class="label">Description</span>
+                        <textarea id="description" name="description" class="form-input"></textarea>
+                    </div>
+                    <div>
+                        <span class="label"></span>
+                        <input id="submit" name="submit" type="submit" value="Publish">
+                    </div>
+                </form>
+            </section>
+            <div id="spacer"></div>
+            <footer>
+                <nav>
+                    <ul>
+                        <li><a href="homescape.html">Home</a></li>
+                        <li><a href="contacts.html">Contacts</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="search.html">Search</a></li>
+                        <li><a href="publish.html">Publish</a></li>
+                    </ul>
+                </nav>
+                <span>Copyright 2019</span>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
