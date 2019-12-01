@@ -1,0 +1,44 @@
+section {
+    display: flex;
+    min-width: 800px;
+    align-self: center;
+    justify-content: center;
+    flex-direction: column;
+
+    font-size: 18px;
+}
+
+section .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+section .title span {
+    flex-grow: 1;
+}
+
+section .title a {
+    flex-grow: 0;
+}
+
+section .main-image {
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 400px;
+    max-height: 400px;
+}
+
+section .datalist {
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+}
+section .datalist div {
+    display: flex;
+}
+
+section .datalist div span:first-child {
+    min-width: 170px;
+}

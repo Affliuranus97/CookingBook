@@ -142,50 +142,38 @@ li.searchList:hover span {
 
 .priceLabel{
   margin-top: 30px;
-  width: 308px;
+  width: 288px;
   display: flex;
   justify-content: space-between;
   font-size: 20px;
   color: #000;
-  span:first-child{
-    margin-left: 10px;
-  }
 }
 
 .sizeLabel{
   margin-top: 30px;
-  width: 308px;
+  width: 288px;
   display: flex;
   justify-content: space-between;
   font-size: 20px;
   color: #000;
-  span:first-child{
-    margin-left: 10px;
-  }
 }
 
 .yearLabel{
   margin-top: 30px;
-  width: 308px;
+  width: 288px;
   display: flex;
   justify-content: space-between;
   font-size: 20px;
   color: #000;
-  span:first-child{
-    margin-left: 10px;
-  }
 }
 
 .floorLabel{
   margin-top: 30px;
-  width: 308px;
+  width: 288px;
   display: flex;
   justify-content: space-between;
   font-size: 20px;
   color: #000;
-  span:first-child{
-    margin-left: 10px;
-  }
 }
 
 .hidden {
@@ -195,7 +183,7 @@ li.searchList:hover span {
 
 .slider {
   margin-top: 29px;
-  width: 300px;
+  width: 280px;
   -webkit-appearance: none;
 }
 
@@ -434,7 +422,7 @@ li.searchList:hover span {
 
 .roomLabel {
     display: flex;
-    width: 200px;
+    width: 260px;
     margin-top: 12px;
     margin-bottom: 12px;
 }
