@@ -14,18 +14,82 @@
             <div class = "content">
                 <div class = "tempTab"></div>
                 <div class = "searchOptions">
-                    <ul> 
-                    <!--<div class = "searchOptions">-->
+                    <ul>
                         <li class = "searchList"><span>Location<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <li class = "searchList" id = "kindButton"><span>Kind<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                            <div id = "hiddenKind" class = "hidden">
+                                <p>
+                                    <input type="radio" id="test1" name="radioKind" checked>
+                                    <label for="test1">Sale</label>
+                                </p>
+                                <p>
+                                    <input type="radio" id="test2" name="radioKind">
+                                    <label for="test2">Rent</label>
+                                </p>
+                            </div>
+                        <li class = "searchList" id = "typeButton"><span>Type<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                            <div id = "hiddenType" class = "hidden">
+                                <p>
+                                    <input type="radio" id="test3" name="radioType" checked>
+                                    <label for="test3">House</label>
+                                </p>
+                                <p>
+                                    <input type="radio" id="test4" name="radioType">
+                                    <label for="test4">Apartment</label>
+                                </p>
+                                <p>
+                                    <input type="radio" id="test5" name="radioType">
+                                    <label for="test5">House Floor</label>
+                                </p>
+                            </div>
+                        <li class = "searchList" id = "constButton"><span>Construction<img class = "arrow" src = "res/arrowDown.png"></span></li>  
+                            <div id = "hiddenConst" class = "hidden">
+                                <p>
+                                    <input type="radio" id="test6" name="radioConst" checked>
+                                    <label for="test6">Brick</label>
+                                </p>
+                                <p>
+                                    <input type="radio" id="test7" name="radioConst">
+                                    <label for="test7">Concrete Panel</label>
+                                </p>
+                            </div>                        
+                        <li class = "searchList" id = "yearButton"><span>Year<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <div id = "hiddenYear" class = "hidden">
+                            <span class = "yearValue" id = "yearValue">0</span>
+                            <input id = "slideBarYear" class = "slider" type = "range" min = "1" max = "100" value = "0">
+                            <div class = "yearLabel"><span>1</span><span>100</span></div>
+                        </div>  
+                        <li class = "searchList" id = "roomButton"><span>Rooms<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <div id = "hiddenRoom" class = "hidden">
+                            <div class="dropdown">
+                              <span class = "roomLabel">Choose Number of Rooms</span>
+                              <div class="dropdown-content">
+                              <p>One Room</p>
+                              <p>Two Rooms</p>
+                              <p>Three Rooms</p>
+                              <p>Four Rooms</p>
+                              <p>Five Rooms</p>
+                              </div>
+                            </div>
+                        </div>
+                        <li class = "searchList" id = "floorButton"><span>Floor<img class = "arrow" src = "res/arrowDown.png"></span></li> 
+                        <div id = "hiddenFloor" class = "hidden">
+                            <span class = "floorValue" id = "floorValue">0</span>
+                            <input id = "slideBarFloor" class = "slider" type = "range" min = "1" max = "100" value = "0">
+                            <div class = "floorLabel"><span>1</span><span>100</span></div>
+                        </div>                        
                         <li class = "searchList" id = "priceButton"><span>Price<img class = "arrow" src = "res/arrowDown.png"></span></li>
-                        <div id = "hidden" class = "hidden">
+                        <div id = "hiddenPrice" class = "hidden">
                             <span class = "priceValue" id = "priceValue">0</span>
-                            <input id = "slideBar" class = "slider" type = "range" min = "1" max = "100" value = "0">
+                            <input id = "slideBarPrice" class = "slider" type = "range" min = "1" max = "100" value = "0">
                             <div class = "priceLabel"><span>1</span><span>100</span></div>
                         </div>
-                        <li class = "searchList"><span>Size<img class = "arrow" src = "res/arrowDown.png"></span></li>
-                        <li class = "searchList"><span>Type<img class = "arrow" src = "res/arrowDown.png"></span></li>
-                        <li class = "searchList"><span>Construction<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <li class = "searchList" id = "sizeButton"><span>Size<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <div id = "hiddenSize" class = "hidden">
+                            <span class = "sizeValue" id = "sizeValue">0</span>
+                            <input id = "slideBarSize" class = "slider" type = "range" min = "1" max = "100" value = "0">
+                            <div class = "priceLabel"><span>1</span><span>100</span></div>
+                        </div>                      
                     </ul>
                  </div>
                 <div class = "searchResults">
