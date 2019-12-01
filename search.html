@@ -16,8 +16,14 @@
                 <div class = "tempTab"></div>
                 <div class = "searchOptions">
                     <ul>
-                        <li class = "searchList"><span>Location<img class = "arrow" src = "res/arrowDown.png"></span></li>
-                        <li class = "searchList" id = "kindButton"><span>Kind<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <li class = "searchList"><span>Location<img class = "arrow" src = "res/arrowDown.png">
+                            <input type="checkbox" name="filter1" value="Location" checked>                            
+                            </span>
+                        </li>
+                        <li class = "searchList" id = "kindButton"><span>Kind<img class = "arrow" src = "res/arrowDown.png">
+                            <input type="checkbox" name="filter2" value="Kind">                        
+                            </span>
+                        </li>
                             <div id = "hiddenKind" class = "hidden">
                                 <p>
                                     <input type="radio" id="test1" name="radioKind" checked>
@@ -28,7 +34,10 @@
                                     <label for="test2">Rent</label>
                                 </p>
                             </div>
-                        <li class = "searchList" id = "typeButton"><span>Type<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <li class = "searchList" id = "typeButton"><span>Type<img class = "arrow" src = "res/arrowDown.png">
+                            <input type="checkbox" name="filter3" value="Type">                            
+                            </span>
+                        </li>
                             <div id = "hiddenType" class = "hidden">
                                 <p>
                                     <input type="radio" id="test3" name="radioType" checked>
@@ -43,7 +52,10 @@
                                     <label for="test5">House Floor</label>
                                 </p>
                             </div>
-                        <li class = "searchList" id = "constButton"><span>Construction<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <li class = "searchList" id = "constButton"><span>Construction<img class = "arrow" src = "res/arrowDown.png">
+                            <input type="checkbox" name="filter4" value="Construction">
+                            </span>
+                        </li>
                             <div id = "hiddenConst" class = "hidden">
                                 <p>
                                     <input type="radio" id="test6" name="radioConst" checked>
@@ -54,13 +66,19 @@
                                     <label for="test7">Concrete Panel</label>
                                 </p>
                             </div>
-                        <li class = "searchList" id = "yearButton"><span>Year<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <li class = "searchList" id = "yearButton"><span>Year<img class = "arrow" src = "res/arrowDown.png">
+                            <input type="checkbox" name="filter5" value="Year">                        
+                            </span>
+                        </li>
                         <div id = "hiddenYear" class = "hidden">
                             <span class = "yearValue" id = "yearValue">0</span>
                             <input id = "slideBarYear" class = "slider" type = "range" min = "1" max = "100" value = "0">
                             <div class = "yearLabel"><span>1</span><span>100</span></div>
                         </div>
-                        <li class = "searchList" id = "roomButton"><span>Rooms<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <li class = "searchList" id = "roomButton"><span>Rooms<img class = "arrow" src = "res/arrowDown.png">
+                            <input type="checkbox" name="filter6" value="Rooms">                        
+                            </span>
+                        </li>
                         <div id = "hiddenRoom" class = "hidden">
                             <div class="dropdown">
                               <span class = "roomLabel">Choose Number of Rooms</span>
@@ -73,19 +91,28 @@
                               </div>
                             </div>
                         </div>
-                        <li class = "searchList" id = "floorButton"><span>Floor<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <li class = "searchList" id = "floorButton"><span>Floor<img class = "arrow" src = "res/arrowDown.png">
+                            <input type="checkbox" name="filter7" value="Floor">                        
+                            </span>
+                        </li>
                         <div id = "hiddenFloor" class = "hidden">
                             <span class = "floorValue" id = "floorValue">0</span>
                             <input id = "slideBarFloor" class = "slider" type = "range" min = "1" max = "100" value = "0">
                             <div class = "floorLabel"><span>1</span><span>100</span></div>
                         </div>
-                        <li class = "searchList" id = "priceButton"><span>Price<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <li class = "searchList" id = "priceButton"><span>Price<img class = "arrow" src = "res/arrowDown.png">
+                            <input type="checkbox" name="filter8" value="Price">
+                            </span>
+                        </li>
                         <div id = "hiddenPrice" class = "hidden">
                             <span class = "priceValue" id = "priceValue">0</span>
                             <input id = "slideBarPrice" class = "slider" type = "range" min = "1" max = "100" value = "0">
                             <div class = "priceLabel"><span>1</span><span>100</span></div>
                         </div>
-                        <li class = "searchList" id = "sizeButton"><span>Size<img class = "arrow" src = "res/arrowDown.png"></span></li>
+                        <li class = "searchList" id = "sizeButton"><span>Size<img class = "arrow" src = "res/arrowDown.png">
+                            <input type="checkbox" name="filter9" value="Size">
+                            </span>
+                        </li>
                         <div id = "hiddenSize" class = "hidden">
                             <span class = "sizeValue" id = "sizeValue">0</span>
                             <input id = "slideBarSize" class = "slider" type = "range" min = "1" max = "100" value = "0">
