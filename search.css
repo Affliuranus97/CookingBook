@@ -1,0 +1,105 @@
+/* JS shit */
+.rotate-image {
+    transform: rotate(180deg);
+}
+
+.searchHeader {
+    min-width: 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-content: center;
+    flex-flow: column;
+}
+
+header {
+    display: flex;
+}
+
+header img{
+    margin: 0 auto;
+}
+
+.content {
+    display: flex;
+    flex-flow: row;
+}
+
+.tempTab {
+    display: flex;
+    width: 5%;
+}
+
+.searchOptions {
+    display: flex;
+    width: 15%;
+    align-content: center;
+    flex-flow: column;    
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.arrow {
+    display: flex;
+    align-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+li.searchList {
+    font-size: 25px;
+    width: 8em;
+    height: 2em;
+    color: #1fe066;
+    border-left: 0.08em solid;
+    position: relative;
+    margin-top: 0.8em;
+    cursor: pointer;
+}
+
+li.searchList::before,
+li.searchList::after
+ {
+    content: '';
+    position: absolute;
+    width: inherit;
+    border-left: inherit;
+    z-index: -1;
+}
+
+li.searchList::before {
+    height: 80%;
+    top: 10%;
+    left: calc(-0.15em - 0.08em * 2);
+    filter: brightness(0.8);
+}
+
+li.searchList::after {
+    height: 60%;
+    top: 20%;
+    left: calc(-0.15em * 2 - 0.08em * 3);
+    filter: brightness(0.6);
+}
+
+li.searchList span {
+    position: relative;
+    height: 120%;
+    top: -10%;
+    box-sizing: border-box;
+    border: 0.08em solid;
+    background-color: #4d2222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    transform: translateX(calc(-0.15em * 3 - 0.08em * 2));
+    transition: 0.3s;
+}
+
+li.searchList:hover span {
+    transform: translateX(0.15em);
+}
