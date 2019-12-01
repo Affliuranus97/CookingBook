@@ -1,0 +1,53 @@
+section {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form div {
+    display: flex;
+}
+
+.form-input {
+    flex-grow: 1;
+    padding: 5px;
+    font-size: 14px;
+}
+
+textarea {
+    max-width: 400px;
+}
+
+.label {
+    min-width: 140px;
+    align-self: center;
+}
+
+.floors-sep {
+    width: 15px;
+    align-self: center;
+    text-align: center;
+    font-size: 24px;
+}
+
+.square-meters {
+    align-self: flex-end;
+    text-align: center;
+}
+
+#submit {
+    height: 34px;
+    flex-grow: 1;
+}
+
+#floor, #floors {
+    max-width: 40px;
+}
+
+.floors-aligner {
+    align-self: center;
+}
