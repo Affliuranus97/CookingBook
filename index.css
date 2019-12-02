@@ -29,3 +29,13 @@
 #main > nav a:hover {
     background: #E7E7E7;
 }
+
+.quote {
+    display: flex;
+    justify-content: center;
+}
+
+.quote img {
+    width: 30%;
+    height: 30%;
+}
