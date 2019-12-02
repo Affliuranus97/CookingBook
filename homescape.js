@@ -59,7 +59,7 @@ priceSlider.oninput = function(){
     priceBullet.innerHTML = this.value;
     var bulletPosition = ((priceSlider.value - priceSlider.min) / (priceSlider.max - priceSlider.min));
     priceBullet.style.left = (bulletPosition * 278) + "px";
-    RunFilters();
+    ShowResults();
 };
 
 var sizeSlider = document.getElementById("slideBarSize");
@@ -70,7 +70,7 @@ sizeSlider.oninput = function(){
     sizeBullet.innerHTML = this.value;
     var bulletPosition = ((sizeSlider.value - sizeSlider.min) / (sizeSlider.max - sizeSlider.min));
     sizeBullet.style.left = (bulletPosition * 278) + "px";
-    RunFilters();
+    ShowResults();
 };
 
 var yearSlider = document.getElementById("slideBarYear");
@@ -81,76 +81,97 @@ yearSlider.oninput = function(){
     yearBullet.innerHTML = this.value;
     var bulletPosition = ((yearSlider.value - yearSlider.min) / (yearSlider.max - yearSlider.min));
     yearBullet.style.left = (bulletPosition * 278) + "px";
-    RunFilters();
+    ShowResults();
 };
 
-var floorSlider = document.getElementById("slideBarFloor");
-var floorBullet = document.getElementById("floorValue");
-floorBullet.innerHTML = floorSlider.value;
+// var floorSlider = document.getElementById("slideBarFloor");
+// var floorBullet = document.getElementById("floorValue");
+// floorBullet.innerHTML = floorSlider.value;
+//
+// floorSlider.oninput = function(){
+//     floorBullet.innerHTML = this.value;
+//     var bulletPosition = ((floorSlider.value - floorSlider.min) / (floorSlider.max - floorSlider.min));
+//     floorBullet.style.left = (bulletPosition * 257) + "px";
+//     ShowResults();
+// };
 
-floorSlider.oninput = function(){
-    floorBullet.innerHTML = this.value;
-    var bulletPosition = ((floorSlider.value - floorSlider.min) / (floorSlider.max - floorSlider.min));
-    floorBullet.style.left = (bulletPosition * 278) + "px";
-    RunFilters();
-};
 
+function CityFilter() {
+    return undefined;
+}
 
-HS = {
-    Kinds: ["sale", "rent"],
-    Types: ["apartment", "house", "house floor"],
-    Constructions: ["panels", "bricks"],
-    RealEstate: [
-        {
-            kind: "sale",
-            city: "Varna",
-            district: "Levski",
-            type: "apartment",
-            price: 100000,
-            floor: 3,
-            floors: 6,
-            rooms: 3,
-            title: "",
-            size: 40,
-            year: 1999,
-            images: [
-                "https://q-cf.bstatic.com/images/hotel/max1024x768/134/134203664.jpg",
-            ],
-            construction: "panels",
-        },
-        {
-            kind: "rent",
-            city: "Varna",
-            district: "Vinitsa",
-            type: "apartment",
-            price: 400,
-            floor: 1,
-            year: 2004,
-            floors: 4,
-            rooms: 2,
-            title: "",
-            size: 36,
-            images: [
-                "https://q-cf.bstatic.com/images/hotel/max1024x768/134/134203664.jpg",
-            ],
-            construction: "bricks",
-        }
-    ]
-};
+function DistrictFilter() {
+    return undefined;
+}
+
+function KindFilter() {
+    if(!$("#filter2").prop("checked")) {
+        return undefined;
+    }
+    return $("#test1").prop("checked") ? "sale" : "rent";
+}
+
+function TypeFilter() {
+    if(!$("#filter3").prop("checked")) {
+        return undefined;
+    }
+    return $("#test3").prop("checked") ? "house" : (
+        $("#test4").prop("checked") ? "apartment" : "house floor"
+    );
+}
+
+function ConstructionFilter() {
+    if(!$("#filter4").prop("checked")) {
+        return undefined;
+    }
+    return $("#test6").prop("checked") ? "bricks" : "panels";
+}
+
+function YearFilter() {
+    if(!$("#filter5").prop("checked")){
+        return undefined;
+    }
+    return $("#slideBarYear").val();
+}
+
+function PriceFilter() {
+    if(!$("#filter8").prop("checked")){
+        return undefined;
+    }
+    return $("#slideBarPrice").val();
+}
+
+function SizeFilter() {
+    if(!$("#filter9").prop("checked")){
+        return undefined;
+    }
+    return $("#slideBarSize").val();
+}
 
 
 function RunFilters() {
-    let maxPrice = undefined;
-    let city = undefined;
-    let district = undefined;
+    let maxPrice = PriceFilter();
+    let city = CityFilter();
+    let district = DistrictFilter();
+    let minRooms = undefined;
+    let minSize = SizeFilter();
+    let minYear = YearFilter();
+    let type = TypeFilter();
+    let construction = ConstructionFilter();
+    let kind = KindFilter();
 
     let results = [];
 
     for (let re of HS.RealEstate) {
-        if (
-               (maxPrice === undefined || re.price <= maxPrice)
-            && (    city === undefined || re.city === city    )
-            && (district === undefined || re.city === district)
+        if (   (maxPrice     === undefined || re.price         <=  maxPrice    )
+            && (city         === undefined || re.city          === city        )
+            && (district     === undefined || re.district      === district    )
+            && (minYear      === undefined || re.year          >=  minYear     )
+            && (minRooms     === undefined || re.rooms         >=  minRooms    )
+            && (minSize      === undefined || re.size          >=  minSize     )
+            && (type         === undefined || re.type          === type        )
+            && (kind         === undefined || re.kind          === kind        )
+            && (construction === undefined || re.construction === construction)
         ) {
             results.push(re);
         }
@@ -180,12 +201,9 @@ function NormalizeSlider(element, minText, maxText, valText, property) {
     minText.html(min);
     maxText.html(max);
 
-    if (val < min){
+    if (val < min || val > max){
         element.attr("value", min);
         valText.html(min);
-    } else if (val > max){
-        element.attr("value", max);
-        valText.html(max);
     }
 }
 
@@ -227,6 +245,12 @@ function ShowResults() {
 
     target.html(results);
 }
+
+for(let i = 1; i <= 9; i++)
+    $(`#filter${i}`).on('click', ShowResults);
+
+for(let i = 1; i <= 7; i++)
+    $(`#test${i}`).on('click', ShowResults);
 
 ShowResults();
 
