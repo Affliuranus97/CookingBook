@@ -31,11 +31,6 @@
 }
 
 .quote {
-    display: flex;
-    justify-content: center;
-}
-
-.quote img {
-    width: 30%;
-    height: 30%;
+    align-self: center;
+    width: 300px;
 }

@@ -15,6 +15,7 @@ HS = {
             title: "",
             size: 40,
             year: 1999,
+            phone: "+359 88 992 1935",
             images: [
                 "https://q-cf.bstatic.com/images/hotel/max1024x768/134/134203664.jpg",
             ],
@@ -31,6 +32,7 @@ HS = {
             floors: 4,
             rooms: 2,
             title: "",
+            phone: "+359 88 992 1935",
             size: 36,
             images: [
                 "https://q-cf.bstatic.com/images/hotel/max1024x768/134/134203664.jpg",
