@@ -11,3 +11,8 @@ for(let k in re){
 }
 
 $(".main-image").attr("src", re.images[0]);
+
+let images = $(".image");
+for(let i in images){
+    images.eq(i).attr("src", re.images.length >= i ? re.images[i] : "res/placeholder.png");
+}

@@ -188,7 +188,7 @@ function RunFilters() {
     for (let re of HS.RealEstate) {
         if (   (maxPrice     === undefined || re.price         <=  maxPrice    )
             && (city         === undefined || re.city          === city        )
-            && (district     === undefined || re.district      === district    )
+            && (district     === undefined || re.district.includes(district)   )
             && (minYear      === undefined || re.year          >=  minYear     )
             && (minRooms     === undefined || re.rooms         >=  minRooms    )
             && (minSize      === undefined || re.size          >=  minSize     )
@@ -254,9 +254,10 @@ function ShowResults() {
 
     let target = $(".searchResults");
 
-    for (let re of filtered) {
+    for (let id in filtered) {
+        let re = filtered[id];
         results += '<div class="re-property">';
-        results += `<img class="re-image" alt="prop-image" src="${re.images[0]}">`;
+        results += `<a href="view_property.html?id=${id}" target="_blank"><img class="re-image" alt="prop-image" src="${re.images[0]}"></a>`;
         results += `<div><span class="re-title">${re.title}</span></div>`;
         results += `<div><span class="re-label">Price:</span><span class="re-value">${re.price} лв</span></div>`;
         results += `<div><span class="re-label">District:</span><span class="re-value">${re.district}</span></div>`;
@@ -275,6 +276,9 @@ for(let i = 1; i <= 9; i++)
 for(let i = 1; i <= 7; i++)
     $(`#test${i}`).on('click', ShowResults);
 
+
+$("#loc_city").on('change', ShowResults);
+$("#loc_district").on('change', ShowResults);
 ShowResults();
 
 

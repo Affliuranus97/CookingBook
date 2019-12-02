@@ -1,9 +1,10 @@
 section {
     display: flex;
-    min-width: 800px;
+    width: 850px;
     align-self: center;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
 
     font-size: 18px;
 }
@@ -30,15 +31,38 @@ section .main-image {
     max-height: 400px;
 }
 
+section .images {
+    min-height: 64px;
+    min-width: 64px;
+}
+
+section .images img {
+    width: 64px;
+    height: 64px;
+}
+
 section .datalist {
     display: flex;
     flex-direction: column;
-    max-height: 400px;
+    width: 400px;
+    margin-top: 5px;
+    margin-left: 5px;
 }
+
 section .datalist div {
     display: flex;
 }
 
 section .datalist div span:first-child {
     min-width: 170px;
+}
+
+#description{
+    margin-top: 24px;
+}
+
+#re-description {
+    margin-left: 9px;
+    width: 850px;
+    min-height: 150px;
 }
